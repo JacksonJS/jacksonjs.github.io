@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="jacksonjs.github.io/"/>
-  <updated>2016-07-14T23:15:48.295Z</updated>
+  <updated>2016-07-15T06:23:21.575Z</updated>
   <id>jacksonjs.github.io/</id>
   
   <author>
@@ -16,19 +16,104 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>My new Post</title>
-    <link href="jacksonjs.github.io/2016/07/14/My-new-Post/"/>
-    <id>jacksonjs.github.io/2016/07/14/My-new-Post/</id>
-    <published>2016-07-14T23:13:34.000Z</published>
-    <updated>2016-07-14T23:15:48.295Z</updated>
+    <title>Creating a Twitter Bot with Node.js</title>
+    <link href="jacksonjs.github.io/2016/07/09/twitterBot/"/>
+    <id>jacksonjs.github.io/2016/07/09/twitterBot/</id>
+    <published>2016-07-10T03:33:59.000Z</published>
+    <updated>2016-07-15T06:23:21.575Z</updated>
     
-    <content type="html">&lt;p&gt;This is the new post!&lt;/p&gt;
+    <content type="html">&lt;p&gt; I am a huge fan of the television program &lt;a href=&quot;http://abc.go.com/shows/shark-tank&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Shark Tank&lt;/a&gt;. To have more fun watching it, I decided to make a twitter bot that would retweet anything that included the searchable hashtag &lt;a href=&quot;https://twitter.com/search?q=%23SharkTank&amp;amp;src=tyah&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;#SharkTank&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;This wasn’t a very hard of a project, there are already many tutorials and boiler plates for getting a bot up and running on Node.js with the Twitter API. You can find the source code to my bot &lt;a href=&quot;https://github.com/JacksonJS/sharkTankBot&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Clone the git repo &lt;code&gt;git clone https://github.com/JacksonJS/sharkTankBot.git&lt;/code&gt; and setup your Twitter account for &lt;a href=&quot;https://apps.twitter.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;apps&lt;/a&gt;, and plugin your credentials into config.js&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;module.exports = &amp;#123;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  consumer_key: &amp;apos;use&amp;apos;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  consumer_secret: &amp;apos;your&amp;apos;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  access_token: &amp;apos;own&amp;apos;,&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  access_token_secret: &amp;apos;tokens&amp;amp;keys&amp;apos;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&amp;#125;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Run &lt;code&gt;npm install&lt;/code&gt; in your root folder, allow the dependencies to be downloaded, and then run:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;node bot.js&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&quot;twitter-timeline&quot; href=&quot;https://twitter.com/SharkTankBot&quot; data-widget-id=&quot;733562729961639936&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Tweets by @SharkTankBot&lt;/a&gt;&lt;/p&gt;
+&lt;script&gt;!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?&#39;http&#39;:&#39;https&#39;;if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+&quot;://platform.twitter.com/widgets.js&quot;;fjs.parentNode.insertBefore(js,fjs);}}(document,&quot;script&quot;,&quot;twitter-wjs&quot;);&lt;/script&gt;
+
+&lt;p&gt;Super easy!&lt;/p&gt;
+&lt;hr&gt;
+&lt;h5 id=&quot;There-are-several-guides-to-help-you-start-making-a-bot-and-I-used-https-github-com-nisrulz-twitterbot-nodejs-as-a-starting-point-for-SharkTankBot&quot;&gt;&lt;a href=&quot;#There-are-several-guides-to-help-you-start-making-a-bot-and-I-used-https-github-com-nisrulz-twitterbot-nodejs-as-a-starting-point-for-SharkTankBot&quot; class=&quot;headerlink&quot; title=&quot;There are several guides to help you start making a bot, and I used https://github.com/nisrulz/twitterbot-nodejs  as a starting point for @SharkTankBot.&quot;&gt;&lt;/a&gt;There are several guides to help you start making a bot, and I used &lt;a href=&quot;https://nisrulz.github.io/twitterbot-nodejs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/nisrulz/twitterbot-nodejs&lt;/a&gt;  as a starting point for &lt;a href=&quot;https://twitter.com/SharkTankBot&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;@SharkTankBot&lt;/a&gt;.&lt;/h5&gt;&lt;hr&gt;
+&lt;h5 id=&quot;Info-for-using-the-Twitter-API-Client-for-node-is-located-here&quot;&gt;&lt;a href=&quot;#Info-for-using-the-Twitter-API-Client-for-node-is-located-here&quot; class=&quot;headerlink&quot; title=&quot;Info for using the Twitter API Client for node is located here&quot;&gt;&lt;/a&gt;Info for using the Twitter API Client for node is located &lt;a href=&quot;https://github.com/ttezel/twit&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;here&lt;/a&gt;&lt;/h5&gt;&lt;hr&gt;
+&lt;p&gt;Edit: I am now using the forever package for node to keep this bot from crashing. To use, run &lt;code&gt;npm install -g forever&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;To start the bot, while in the bot root directory, run &lt;code&gt;forever start --spinSleepTime 10000 bot.js&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Instead of writing to the console, our logs will go somewhere in &lt;code&gt;~/.forever&lt;/code&gt;. To locate the log for your currently running node project, run &lt;code&gt;forever list&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;If you would like to see the live updates of logs, run &lt;code&gt;tail -f &amp;lt;logfile&amp;gt;&lt;/code&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;I will update this post as I add new features to the bot. Have fun, and stay safe!&lt;/p&gt;
+&lt;h1 id=&quot;😎&quot;&gt;&lt;a href=&quot;#😎&quot; class=&quot;headerlink&quot; title=&quot;😎&quot;&gt;&lt;/a&gt;😎&lt;/h1&gt;</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; I am a huge fan of the television program &lt;a href=&quot;http://abc.go.com/shows/shark-tank&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Shark Tank&lt;/a&gt;. To
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Podcasts</title>
+    <link href="jacksonjs.github.io/2016/07/06/podcasts/"/>
+    <id>jacksonjs.github.io/2016/07/06/podcasts/</id>
+    <published>2016-07-07T05:57:30.000Z</published>
+    <updated>2016-07-15T06:22:59.815Z</updated>
+    
+    <content type="html">&lt;p&gt;I listen to a few podcasts when I go running and sometimes when I am browsing the web. I find it a great way to stay informed about new developments in devops and web development. Listening to people much more experienced than myself helps me learn about methodologies, products, and planning strategies that I would not have heard of otherwise. Here are some of the technology  podcasts that i enjoy the most.&lt;/p&gt;
+&lt;h3 id=&quot;Complete-Developer-Podcast&quot;&gt;&lt;a href=&quot;#Complete-Developer-Podcast&quot; class=&quot;headerlink&quot; title=&quot;Complete Developer Podcast&quot;&gt;&lt;/a&gt;Complete Developer Podcast&lt;/h3&gt;&lt;p&gt;Complete Developer Podcast: &lt;a href=&quot;http://completedeveloperpodcast.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://completedeveloperpodcast.com/&lt;/a&gt;&lt;br&gt;New podcast, extremely helpful  and informative, very educational&lt;/p&gt;
+&lt;h3 id=&quot;Jupiter-Broadcasting&quot;&gt;&lt;a href=&quot;#Jupiter-Broadcasting&quot; class=&quot;headerlink&quot; title=&quot;Jupiter Broadcasting&quot;&gt;&lt;/a&gt;Jupiter Broadcasting&lt;/h3&gt;&lt;p&gt;Coder Radio: &lt;a href=&quot;http://www.jupiterbroadcasting.com/show/coderradio/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jupiterbroadcasting.com/show/coderradio/&lt;/a&gt;&lt;br&gt;Linux Unplugged: &lt;a href=&quot;http://www.jupiterbroadcasting.com/show/linuxun/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jupiterbroadcasting.com/show/linuxun/&lt;/a&gt;&lt;br&gt;Linux Action show: &lt;a href=&quot;http://www.jupiterbroadcasting.com/show/linuxactionshow&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jupiterbroadcasting.com/show/linuxactionshow&lt;/a&gt;&lt;br&gt;Linux focused tech podcasts: &lt;a href=&quot;http://www.jupiterbroadcasting.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.jupiterbroadcasting.com/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Software-Engineering-Daily&quot;&gt;&lt;a href=&quot;#Software-Engineering-Daily&quot; class=&quot;headerlink&quot; title=&quot;Software Engineering Daily&quot;&gt;&lt;/a&gt;Software Engineering Daily&lt;/h3&gt;&lt;p&gt;Software Engineering Daily: &lt;a href=&quot;http://softwareengineeringdaily.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://softwareengineeringdaily.com/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Devchat-tv&quot;&gt;&lt;a href=&quot;#Devchat-tv&quot; class=&quot;headerlink&quot; title=&quot;Devchat.tv&quot;&gt;&lt;/a&gt;Devchat.tv&lt;/h3&gt;&lt;p&gt;Javascript Jabber: &lt;a href=&quot;https://devchat.tv/js-jabber&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://devchat.tv/js-jabber&lt;/a&gt;&lt;br&gt;Several great tech podcasts: &lt;a href=&quot;https://devchat.tv/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://devchat.tv/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Spec-fm&quot;&gt;&lt;a href=&quot;#Spec-fm&quot; class=&quot;headerlink&quot; title=&quot;Spec.fm&quot;&gt;&lt;/a&gt;Spec.fm&lt;/h3&gt;&lt;p&gt;Developer Tea: &lt;a href=&quot;http://spec.fm/podcasts/developer-tea&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://spec.fm/podcasts/developer-tea&lt;/a&gt;&lt;br&gt;Does Not Compute: &lt;a href=&quot;http://spec.fm/podcasts/does-not-compute&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://spec.fm/podcasts/does-not-compute&lt;/a&gt;&lt;br&gt;Several great development and design podcasts: &lt;a href=&quot;http://spec.fm/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://spec.fm/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Twit-tv&quot;&gt;&lt;a href=&quot;#Twit-tv&quot; class=&quot;headerlink&quot; title=&quot;Twit.tv&quot;&gt;&lt;/a&gt;Twit.tv&lt;/h3&gt;&lt;p&gt;Security Now!: &lt;a href=&quot;https://www.grc.com/securitynow.htm&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://www.grc.com/securitynow.html&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;The-Changelog&quot;&gt;&lt;a href=&quot;#The-Changelog&quot; class=&quot;headerlink&quot; title=&quot;The Changelog&quot;&gt;&lt;/a&gt;The Changelog&lt;/h3&gt;&lt;p&gt;The Changelog: &lt;a href=&quot;https://changelog.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://changelog.com/&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
     
-      &lt;p&gt;This is the new post!&lt;/p&gt;
-
+      &lt;p&gt;I listen to a few podcasts when I go running and sometimes when I am browsing the web. I find it a great way to stay informed about new d
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Let&#39;s Encrypt, Docker, and WordPress</title>
+    <link href="jacksonjs.github.io/2016/07/02/dockerWordpressEncrypt/"/>
+    <id>jacksonjs.github.io/2016/07/02/dockerWordpressEncrypt/</id>
+    <published>2016-07-03T06:00:25.000Z</published>
+    <updated>2016-07-15T06:22:14.794Z</updated>
+    
+    <content type="html">&lt;p&gt;I had a very specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Wew, tall order!&lt;/p&gt;
+&lt;p&gt;VERY luckily for me, the project &lt;a href=&quot;https://github.com/steveltn/https-portal&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;HTTPS-PORTAL&lt;/a&gt; is is working order and being actively developed! &lt;/p&gt;
+&lt;p&gt;Using &lt;a href=&quot;https://letsencrypt.org/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Let’s Encrypt’s&lt;/a&gt; certificate automation, I was able to set up an HTTPS wordpress install in under five minutes. Here are some reasons why sites should be using HTTPS:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;HTTPS helps prevent intruders from tampering with the communications between your websites and your users’ browsers. Intruders include intentionally malicious attackers, and legitimate but intrusive companies, such as ISPs or hotels that inject ads into pages.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;HTTPS prevents intruders from being able to passively listen in on the communications between your websites and your users.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;It is much cheaper and faster to imlement because of the Let’s Encrypt project!&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I followed &lt;a href=&quot;https://steveltn.me/2015/12/18/nginx-acme/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;this tutorial &lt;/a&gt; (currently offline 😔) to get me up and running with my wordpress install. I had some problems understanding how to write a docker-compose file, but the blog author was very quick assisting to correct my mistakes. &lt;/p&gt;
+&lt;p&gt;Here is what my docker-compose.yml file contained, minus the real password:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;# docker-compose.yml for my_wordpress site&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;https-portal:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  image: steveltn/https-portal&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  ports:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    - 80:80&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    - 443:443&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  links:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    - wordpress&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  environment:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    - &amp;quot;DOMAINS=containerize.us -&amp;gt; http://wordpress&amp;quot; #maps https-portal to the wordpress image&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    - &amp;quot;PRODUCTION=true&amp;quot; #ensures that the certificate will be recognized as valid by web browsers&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;wordpress:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  image: wordpress&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  links:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    - db:mysql&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;db:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  image: mariadb&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  ports:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    - 3306:3306&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  environment:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    MYSQL_ROOT_PASSWORD: &amp;lt;secure_password&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;After waiting for awhile while the computer produces spins up the HTTPS WordPress instance, we have WordPress installed! &lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/content/images/2016/05/wp_install_success.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Now let’s insert some media. Right now, the upload limit is a puny 2MB. Let’s change it to 64MB.&lt;/p&gt;
+&lt;p&gt;To enter the container, type:&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;docker &lt;span class=&quot;built_in&quot;&gt;exec&lt;/span&gt; -i -t mywordpress_wordpress_1 bash&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;To install the nano text editor, type:&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;apt-get update&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;apt-get install vim&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;Create the file php.ini in you WordPress root directory&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;vi php.ini&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;Once in, paste these lines:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;upload_max_filesize = 64M&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;post_max_size = 64M&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;memory_limit = 64M&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;Stop the running containers&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;docker stop mywordpress_db_1 mywordpress_https-portal_1 mywordpress_wordpress_1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;In the directory you put docker-compose.yml, run:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;docker-compose up -d&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;Hooray, our upload limit is now increased! We can now upload media up to 64MB.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/content/images/2016/05/improved_upload_limit-1.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I had a very specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a do
     
     </summary>
     
@@ -37,10 +122,10 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="jacksonjs.github.io/2016/07/14/hello-world/"/>
-    <id>jacksonjs.github.io/2016/07/14/hello-world/</id>
-    <published>2016-07-14T23:02:48.524Z</published>
-    <updated>2016-07-14T23:02:48.524Z</updated>
+    <link href="jacksonjs.github.io/2016/07/02/hello-world/"/>
+    <id>jacksonjs.github.io/2016/07/02/hello-world/</id>
+    <published>2016-07-02T13:00:25.000Z</published>
+    <updated>2016-07-15T06:25:32.556Z</updated>
     
     <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
