@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="jacksonjs.github.io/"/>
-  <updated>2016-07-20T10:16:35.668Z</updated>
+  <updated>2016-07-20T10:31:18.628Z</updated>
   <id>jacksonjs.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="jacksonjs.github.io/2016/07/19/quassel/"/>
     <id>jacksonjs.github.io/2016/07/19/quassel/</id>
     <published>2016-07-20T00:32:01.000Z</published>
-    <updated>2016-07-20T10:16:35.668Z</updated>
+    <updated>2016-07-20T10:31:18.628Z</updated>
     
     <content type="html">&lt;p&gt;Quassel IRC is a modern, cross platform, distrubuted IRC client. It requires users to set up both the server (QuasselreCore) and a client. The client attaches to the core, which saves all the IRC info. You can create new users that have seperate profiles and channels from each other, allowing multiple people to use the same core without messing up each others settings.&lt;/p&gt;
 &lt;p&gt;I will assume you have an ubuntu 14.04 Digital Ocean droplet to install your Quasselcore. When we install, we will be using the SQlite database so that we can use the manaers.py script later to add and manage multiple users.&lt;/p&gt;
@@ -41,7 +41,7 @@
 &lt;p&gt;Now we will configure Quassel to add users. We cannot do this in the gui, we must do it as root in the core. &lt;/p&gt;
 &lt;p&gt;First, logout of Quassel on your devices (just to play it safe so we don’t have to do an entire reinstallation).&lt;/p&gt;
 &lt;p&gt;In your VPS, go to /var/lib/quassel/&lt;/p&gt;
-&lt;p&gt;Copy the manageusers.py file from &lt;a href=&quot;https://github.com/quassel-manage-users/&quot;&gt;this github repo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Copy the manageusers.py file from &lt;a href=&quot;https://github.com/eugeii/quassel-manage-users&quot;&gt;this GitHub repo&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Run the script.&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;./manageusers.py &amp;lt;user&amp;gt; &amp;lt;password&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;Open up a new instance of Quasselclient, add the server and user information, and set it up just like before. &lt;/p&gt;
 &lt;p&gt;Boom, you now have a persistent IRC connection!&lt;/p&gt;
@@ -56,6 +56,14 @@
     
     </summary>
     
+    
+      <category term="irc" scheme="jacksonjs.github.io/tags/irc/"/>
+    
+      <category term="vps" scheme="jacksonjs.github.io/tags/vps/"/>
+    
+      <category term="quassel" scheme="jacksonjs.github.io/tags/quassel/"/>
+    
+      <category term="SQLite" scheme="jacksonjs.github.io/tags/SQLite/"/>
     
   </entry>
   
