@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="jacksonjs.github.io/"/>
-  <updated>2016-07-20T01:15:49.899Z</updated>
+  <updated>2016-07-20T10:16:35.668Z</updated>
   <id>jacksonjs.github.io/</id>
   
   <author>
@@ -16,33 +16,43 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>quassel</title>
+    <title>Quassel IRC</title>
     <link href="jacksonjs.github.io/2016/07/19/quassel/"/>
     <id>jacksonjs.github.io/2016/07/19/quassel/</id>
     <published>2016-07-20T00:32:01.000Z</published>
-    <updated>2016-07-20T01:15:49.899Z</updated>
+    <updated>2016-07-20T10:16:35.668Z</updated>
     
-    <content type="html">&lt;p&gt;Quassel IRC is a modern, cross platform, distrubuted IRC client. It requires users to set up both hte server (QuasselreCore) and a client. The client attaches to the core, which saves all the IRC info. You can create new users that have seperate profiles and channels from each other, allowing multiple people to use the same core without messing up each others settings.&lt;/p&gt;
+    <content type="html">&lt;p&gt;Quassel IRC is a modern, cross platform, distrubuted IRC client. It requires users to set up both the server (QuasselreCore) and a client. The client attaches to the core, which saves all the IRC info. You can create new users that have seperate profiles and channels from each other, allowing multiple people to use the same core without messing up each others settings.&lt;/p&gt;
 &lt;p&gt;I will assume you have an ubuntu 14.04 Digital Ocean droplet to install your Quasselcore. When we install, we will be using the SQlite database so that we can use the manaers.py script later to add and manage multiple users.&lt;/p&gt;
-&lt;p&gt;SSH into server&lt;/p&gt;
-&lt;p&gt;add repository&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo add-apt-repository ppa:mamarley/quassel&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get update&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install quasselcore&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;SSH into your &lt;strong&gt;server&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Add repository&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo add-apt-repository ppa:mamarley/quassel&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get update&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install quassel-core&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;Check that Quasselcore is running (I’m using sudo to display the process name)&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo netstat -tulpn&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;Output should be almost identical to:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;tcp6       0      0 :::4242                 :::*                    LISTEN      764/quasselcore&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;On client computer, add repo&lt;/p&gt;
+&lt;p&gt;On &lt;strong&gt;client&lt;/strong&gt; computer, add repo:&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo add-apt-repository ppa:mamarley/quassel&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get update&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install quasselclient&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;Connect your Quassel Client to your server and follow the setup wizard.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;./../quassel/createAdmin.png&quot; alt=&quot;setup_core&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;./../quassel/selectStorage.png&quot; alt=&quot;selectStorage&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;./../quassel/accpet_untrusted_cert.png&quot; alt=&quot;accept_untrusted_cert&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;./../quassel/setup_core.png&quot; alt=&quot;setup_core&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Create Admin User:&lt;br&gt;&lt;img src=&quot;./../quassel/createAdmin.png&quot; alt=&quot;setup_core&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Use the default sqlite database:&lt;br&gt;&lt;img src=&quot;./../quassel/selectStorage.png&quot; alt=&quot;selectStorage&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Accept the self-signed certificate:&lt;br&gt;&lt;img src=&quot;./../quassel/accpet_untrusted_cert.png&quot; alt=&quot;accept_untrusted_cert&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Add core accounts:&lt;br&gt;&lt;img src=&quot;./../quassel/setup_core.png&quot; alt=&quot;setup_core&quot;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;./../quassel/setup_core_account_edit.png&quot; alt=&quot;setup_account&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;./../quassel/setup_network.png&quot; alt=&quot;setupNetwork&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Setup your networks:&lt;br&gt;&lt;img src=&quot;./../quassel/setup_network.png&quot; alt=&quot;setupNetwork&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Now we will configure Quassel to add users. We cannot do this in the gui, we must do it as root in the core. &lt;/p&gt;
+&lt;p&gt;First, logout of Quassel on your devices (just to play it safe so we don’t have to do an entire reinstallation).&lt;/p&gt;
+&lt;p&gt;In your VPS, go to /var/lib/quassel/&lt;/p&gt;
+&lt;p&gt;Copy the manageusers.py file from &lt;a href=&quot;https://github.com/quassel-manage-users/&quot;&gt;this github repo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Run the script.&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;./manageusers.py &amp;lt;user&amp;gt; &amp;lt;password&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;Open up a new instance of Quasselclient, add the server and user information, and set it up just like before. &lt;/p&gt;
+&lt;p&gt;Boom, you now have a persistent IRC connection!&lt;/p&gt;
+&lt;h1 id=&quot;NOTE&quot;&gt;&lt;a href=&quot;#NOTE&quot; class=&quot;headerlink&quot; title=&quot;NOTE:&quot;&gt;&lt;/a&gt;NOTE:&lt;/h1&gt;&lt;p&gt;If your SQlite database gets too big for your liking you can reduce its size using &lt;a href=&quot;https://gist.github.com/ddrown/d7d2abbdf533b058a0c4&quot;&gt;this&lt;/a&gt; script or this &lt;a href=&quot;https://gist.github.com/Taverius/1f7f2d61d8469dec2ce9&quot;&gt;other script that includes making a backup&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://gist.github.com/Und3rf10w/36a2034cb2c8eafbfb801c1a89e1f8bc&quot;&gt;Here&lt;/a&gt; is a weekly purge.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://gist.github.com/Furyhunter/7d5649eac69541ac783c&quot;&gt;Another&lt;/a&gt; method, this time running an sqlite command.&lt;/p&gt;
 </content>
     
     <summary type="html">
     
-      &lt;p&gt;Quassel IRC is a modern, cross platform, distrubuted IRC client. It requires users to set up both hte server (QuasselreCore) and a client
+      &lt;p&gt;Quassel IRC is a modern, cross platform, distrubuted IRC client. It requires users to set up both the server (QuasselreCore) and a client
     
     </summary>
     
