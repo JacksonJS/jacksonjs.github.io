@@ -72,7 +72,7 @@
     <link href="jacksonjs.github.io/2016/07/09/twitterBot/"/>
     <id>jacksonjs.github.io/2016/07/09/twitterBot/</id>
     <published>2016-07-10T03:33:59.000Z</published>
-    <updated>2016-07-15T06:23:21.575Z</updated>
+    <updated>2016-07-21T01:12:26.716Z</updated>
     
     <content type="html">&lt;p&gt; I am a huge fan of the television program &lt;a href=&quot;http://abc.go.com/shows/shark-tank&quot;&gt;Shark Tank&lt;/a&gt;. To have more fun watching it, I decided to make a twitter bot that would retweet anything that included the searchable hashtag &lt;a href=&quot;https://twitter.com/search?q=%23SharkTank&amp;amp;src=tyah&quot;&gt;#SharkTank&lt;/a&gt;. &lt;/p&gt;
 &lt;p&gt;This wasn’t a very hard of a project, there are already many tutorials and boiler plates for getting a bot up and running on Node.js with the Twitter API. You can find the source code to my bot &lt;a href=&quot;https://github.com/JacksonJS/sharkTankBot&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
@@ -92,7 +92,8 @@
 &lt;p&gt;If you would like to see the live updates of logs, run &lt;code&gt;tail -f &amp;lt;logfile&amp;gt;&lt;/code&gt;.&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;I will update this post as I add new features to the bot. Have fun, and stay safe!&lt;/p&gt;
-&lt;h1 id=&quot;😎&quot;&gt;&lt;a href=&quot;#😎&quot; class=&quot;headerlink&quot; title=&quot;😎&quot;&gt;&lt;/a&gt;😎&lt;/h1&gt;</content>
+&lt;h1 id=&quot;😎&quot;&gt;&lt;a href=&quot;#😎&quot; class=&quot;headerlink&quot; title=&quot;😎&quot;&gt;&lt;/a&gt;😎&lt;/h1&gt;&lt;p&gt;&lt;i class=&quot;fa fa-refresh slow-spin  fa-big fa-fw&quot;&gt;&lt;/i&gt;&lt;/p&gt;
+</content>
     
     <summary type="html">
     
@@ -101,6 +102,12 @@
     </summary>
     
     
+      <category term="Node" scheme="jacksonjs.github.io/tags/Node/"/>
+    
+      <category term="Twitter" scheme="jacksonjs.github.io/tags/Twitter/"/>
+    
+      <category term="API" scheme="jacksonjs.github.io/tags/API/"/>
+    
   </entry>
   
   <entry>
@@ -108,7 +115,7 @@
     <link href="jacksonjs.github.io/2016/07/06/podcasts/"/>
     <id>jacksonjs.github.io/2016/07/06/podcasts/</id>
     <published>2016-07-07T05:57:30.000Z</published>
-    <updated>2016-07-15T06:22:59.815Z</updated>
+    <updated>2016-07-21T00:43:53.188Z</updated>
     
     <content type="html">&lt;p&gt;I listen to a few podcasts when I go running and sometimes when I am browsing the web. I find it a great way to stay informed about new developments in devops and web development. Listening to people much more experienced than myself helps me learn about methodologies, products, and planning strategies that I would not have heard of otherwise. Here are some of the technology  podcasts that i enjoy the most.&lt;/p&gt;
 &lt;h3 id=&quot;Complete-Developer-Podcast&quot;&gt;&lt;a href=&quot;#Complete-Developer-Podcast&quot; class=&quot;headerlink&quot; title=&quot;Complete Developer Podcast&quot;&gt;&lt;/a&gt;Complete Developer Podcast&lt;/h3&gt;&lt;p&gt;Complete Developer Podcast: &lt;a href=&quot;http://completedeveloperpodcast.com/&quot;&gt;http://completedeveloperpodcast.com/&lt;/a&gt;&lt;br&gt;New podcast, extremely helpful  and informative, very educational&lt;/p&gt;
@@ -127,6 +134,14 @@
     </summary>
     
     
+      <category term="Podcasts" scheme="jacksonjs.github.io/tags/Podcasts/"/>
+    
+      <category term="Linux" scheme="jacksonjs.github.io/tags/Linux/"/>
+    
+      <category term="Development" scheme="jacksonjs.github.io/tags/Development/"/>
+    
+      <category term="Javascript" scheme="jacksonjs.github.io/tags/Javascript/"/>
+    
   </entry>
   
   <entry>
@@ -134,10 +149,10 @@
     <link href="jacksonjs.github.io/2016/07/02/dockerWordpressEncrypt/"/>
     <id>jacksonjs.github.io/2016/07/02/dockerWordpressEncrypt/</id>
     <published>2016-07-03T06:00:25.000Z</published>
-    <updated>2016-07-20T00:13:35.780Z</updated>
+    <updated>2016-07-21T00:43:14.764Z</updated>
     
-    <content type="html">&lt;p&gt;I had a very specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Wew, tall order!&lt;/p&gt;
-&lt;p&gt;VERY luckily for me, the project &lt;a href=&quot;https://github.com/steveltn/https-portal&quot;&gt;HTTPS-PORTAL&lt;/a&gt; is is working order and being actively developed! &lt;/p&gt;
+    <content type="html">&lt;p&gt;I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Seemed challenging.&lt;/p&gt;
+&lt;p&gt;Luckily for me, the project &lt;a href=&quot;https://github.com/steveltn/https-portal&quot;&gt;HTTPS-PORTAL&lt;/a&gt; is is working order and being actively developed! &lt;/p&gt;
 &lt;p&gt;Using &lt;a href=&quot;https://letsencrypt.org/&quot;&gt;Let’s Encrypt’s&lt;/a&gt; certificate automation, I was able to set up an HTTPS wordpress install in under five minutes. Here are some reasons why sites should be using HTTPS:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;HTTPS helps prevent intruders from tampering with the communications between your websites and your users’ browsers. Intruders include intentionally malicious attackers, and legitimate but intrusive companies, such as ISPs or hotels that inject ads into pages.&lt;/p&gt;
@@ -147,11 +162,11 @@
 &lt;li&gt;&lt;p&gt;It is much cheaper and faster to imlement because of the Let’s Encrypt project!&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;I followed &lt;a href=&quot;https://steveltn.me/2015/12/18/nginx-acme/&quot;&gt;this tutorial &lt;/a&gt; (currently offline 😔) to get me up and running with my wordpress install. I had some problems understanding how to write a docker-compose file, but the blog author was very quick assisting to correct my mistakes. &lt;/p&gt;
+&lt;p&gt;I followed &lt;a href=&quot;https://steveltn.me/2015/12/18/nginx-acme/&quot;&gt;this tutorial &lt;/a&gt; (currently offline 😔) to get me up and running with my wordpress install. I had some problems understanding how to write a docker-compose file, but the blog author was very quick in helping to correct my mistakes. &lt;/p&gt;
 &lt;p&gt;Here is what my docker-compose.yml file contained, minus the real password:&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;15&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;16&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;17&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;18&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;19&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;20&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;21&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;22&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;23&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;24&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;# docker-compose.yml for my_wordpress site&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;https-portal:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  image: steveltn/https-portal&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  ports:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    - 80:80&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    - 443:443&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  links:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    - wordpress&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  environment:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    - &amp;quot;DOMAINS=containerize.us -&amp;gt; http://wordpress&amp;quot; #maps https-portal to the wordpress image&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    - &amp;quot;PRODUCTION=true&amp;quot; #ensures that the certificate will be recognized as valid by web browsers&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;wordpress:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  image: wordpress&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  links:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    - db:mysql&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;db:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  image: mariadb&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  ports:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    - 3306:3306&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;  environment:&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;    MYSQL_ROOT_PASSWORD: &amp;apos;&amp;lt;secure_password&amp;gt;&amp;apos;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;After the server generates a TLS diffie-hellman key and spins up the WordPress instance, we have our WordPress site installed! &lt;/p&gt;
-&lt;p&gt;Now let’s insert some media. While you could just embedd everything from an external site like youtube and imagur, it is nice to have the option to host your own assets.  Right now, the upload limit is a puny 2MB. Let’s change it to 64MB.&lt;/p&gt;
+&lt;p&gt;After the server generates a TLS Diffie-Hellman key and spins up the WordPress instance, we have our WordPress site installed! &lt;/p&gt;
+&lt;p&gt;Now let’s insert some media. While you could just embed everything from an external site like youtube and imagur, it is nice to have the option to host your own assets.  Right now, the upload limit is a puny 2MB. Let’s change it to 64MB.&lt;/p&gt;
 &lt;p&gt;To enter the container, type:&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;docker &lt;span class=&quot;built_in&quot;&gt;exec&lt;/span&gt; -i -t mywordpress_wordpress_1 bash&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;To install the nano text editor, type:&lt;br&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;apt-get update&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;apt-get install nano&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;Create the file php.ini in you WordPress root directory&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;vi php.ini&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -164,37 +179,16 @@
     
     <summary type="html">
     
-      &lt;p&gt;I had a very specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a do
+      &lt;p&gt;I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker 
     
     </summary>
     
     
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="jacksonjs.github.io/2016/07/02/hello-world/"/>
-    <id>jacksonjs.github.io/2016/07/02/hello-world/</id>
-    <published>2016-07-02T13:00:25.000Z</published>
-    <updated>2016-07-15T06:25:32.556Z</updated>
+      <category term="Docker" scheme="jacksonjs.github.io/tags/Docker/"/>
     
-    <content type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for more info. If you get any problems when using Hexo, you can find the answer in &lt;a href=&quot;https://hexo.io/docs/troubleshooting.html&quot;&gt;troubleshooting&lt;/a&gt; or you can ask me on &lt;a href=&quot;https://github.com/hexojs/hexo/issues&quot;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
-&lt;h2 id=&quot;Quick-Start&quot;&gt;&lt;a href=&quot;#Quick-Start&quot; class=&quot;headerlink&quot; title=&quot;Quick Start&quot;&gt;&lt;/a&gt;Quick Start&lt;/h2&gt;&lt;h3 id=&quot;Create-a-new-post&quot;&gt;&lt;a href=&quot;#Create-a-new-post&quot; class=&quot;headerlink&quot; title=&quot;Create a new post&quot;&gt;&lt;/a&gt;Create a new post&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo new &lt;span class=&quot;string&quot;&gt;&quot;My New Post&quot;&lt;/span&gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/writing.html&quot;&gt;Writing&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Run-server&quot;&gt;&lt;a href=&quot;#Run-server&quot; class=&quot;headerlink&quot; title=&quot;Run server&quot;&gt;&lt;/a&gt;Run server&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo server&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/server.html&quot;&gt;Server&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Generate-static-files&quot;&gt;&lt;a href=&quot;#Generate-static-files&quot; class=&quot;headerlink&quot; title=&quot;Generate static files&quot;&gt;&lt;/a&gt;Generate static files&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo generate&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/generating.html&quot;&gt;Generating&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Deploy-to-remote-sites&quot;&gt;&lt;a href=&quot;#Deploy-to-remote-sites&quot; class=&quot;headerlink&quot; title=&quot;Deploy to remote sites&quot;&gt;&lt;/a&gt;Deploy to remote sites&lt;/h3&gt;&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;$ hexo deploy&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;More info: &lt;a href=&quot;https://hexo.io/docs/deployment.html&quot;&gt;Deployment&lt;/a&gt;&lt;/p&gt;
-</content>
+      <category term="Let's Encrypt" scheme="jacksonjs.github.io/tags/Let-s-Encrypt/"/>
     
-    <summary type="html">
-    
-      &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt; for
-    
-    </summary>
-    
+      <category term="Wordpress" scheme="jacksonjs.github.io/tags/Wordpress/"/>
     
   </entry>
   

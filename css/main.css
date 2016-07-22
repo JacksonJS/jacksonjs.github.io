@@ -142,7 +142,7 @@ img {
   transition: opacity 0.5s ease-in-out;
   left: 50%;
   width: 50px;
-  margin-top: -25px;
+  margin-top: -37px;
 }
 .navbar-custom .avatar-container  .avatar-img-border {
   width: 100%;
@@ -569,6 +569,28 @@ table tr td :last-child {
 .tag:focus, .tag:hover {
   text-decoration: none;
   color: #0085a1
+}
+
+/*custom from here */
+
+.blackIcon {
+  color: #000000;
+}
+
+.aquaIcon {
+  color: #33F5B4
+}
+
+.fa-big{
+  font-size: 500px !important;
+ }
+
+.slow-spin {
+  -webkit-animation: fa-spin 6s infinite linear;
+}
+
+.slow-spin-left {
+  -webkit-animation: fa-spin 6s infinite linear reverse;
 }
 
 
