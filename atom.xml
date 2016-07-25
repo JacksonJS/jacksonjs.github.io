@@ -149,13 +149,13 @@
     </summary>
     
     
-      <category term="SQLite" scheme="jacksonjs.github.io/tags/SQLite/"/>
-    
       <category term="IRC" scheme="jacksonjs.github.io/tags/IRC/"/>
     
       <category term="VPS" scheme="jacksonjs.github.io/tags/VPS/"/>
     
       <category term="Quassel" scheme="jacksonjs.github.io/tags/Quassel/"/>
+    
+      <category term="SQLite" scheme="jacksonjs.github.io/tags/SQLite/"/>
     
   </entry>
   
