@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="jacksonjs.github.io/"/>
-  <updated>2016-07-20T10:31:18.628Z</updated>
+  <updated>2016-07-25T10:06:47.097Z</updated>
   <id>jacksonjs.github.io/</id>
   
   <author>
@@ -16,63 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Quassel IRC</title>
-    <link href="jacksonjs.github.io/2016/07/19/quassel/"/>
-    <id>jacksonjs.github.io/2016/07/19/quassel/</id>
-    <published>2016-07-20T00:32:01.000Z</published>
-    <updated>2016-07-20T10:31:18.628Z</updated>
-    
-    <content type="html">&lt;p&gt;Quassel IRC is a modern, cross platform, distrubuted IRC client. It requires users to set up both the server (QuasselreCore) and a client. The client attaches to the core, which saves all the IRC info. You can create new users that have seperate profiles and channels from each other, allowing multiple people to use the same core without messing up each others settings.&lt;/p&gt;
-&lt;p&gt;I will assume you have an ubuntu 14.04 Digital Ocean droplet to install your Quasselcore. When we install, we will be using the SQlite database so that we can use the manaers.py script later to add and manage multiple users.&lt;/p&gt;
-&lt;p&gt;SSH into your &lt;strong&gt;server&lt;/strong&gt;.&lt;/p&gt;
-&lt;p&gt;Add repository&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo add-apt-repository ppa:mamarley/quassel&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get update&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install quassel-core&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;Check that Quasselcore is running (I’m using sudo to display the process name)&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo netstat -tulpn&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;Output should be almost identical to:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;tcp6       0      0 :::4242                 :::*                    LISTEN      764/quasselcore&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;On &lt;strong&gt;client&lt;/strong&gt; computer, add repo:&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo add-apt-repository ppa:mamarley/quassel&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get update&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install quasselclient&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;Connect your Quassel Client to your server and follow the setup wizard.&lt;/p&gt;
-&lt;p&gt;Create Admin User:&lt;br&gt;&lt;img src=&quot;./../quassel/createAdmin.png&quot; alt=&quot;setup_core&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Use the default sqlite database:&lt;br&gt;&lt;img src=&quot;./../quassel/selectStorage.png&quot; alt=&quot;selectStorage&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Accept the self-signed certificate:&lt;br&gt;&lt;img src=&quot;./../quassel/accpet_untrusted_cert.png&quot; alt=&quot;accept_untrusted_cert&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Add core accounts:&lt;br&gt;&lt;img src=&quot;./../quassel/setup_core.png&quot; alt=&quot;setup_core&quot;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;./../quassel/setup_core_account_edit.png&quot; alt=&quot;setup_account&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Setup your networks:&lt;br&gt;&lt;img src=&quot;./../quassel/setup_network.png&quot; alt=&quot;setupNetwork&quot;&gt;&lt;/p&gt;
-&lt;p&gt;Now we will configure Quassel to add users. We cannot do this in the gui, we must do it as root in the core. &lt;/p&gt;
-&lt;p&gt;First, logout of Quassel on your devices (just to play it safe so we don’t have to do an entire reinstallation).&lt;/p&gt;
-&lt;p&gt;In your VPS, go to /var/lib/quassel/&lt;/p&gt;
-&lt;p&gt;Copy the manageusers.py file from &lt;a href=&quot;https://github.com/eugeii/quassel-manage-users&quot;&gt;this GitHub repo&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Run the script.&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;./manageusers.py &amp;lt;user&amp;gt; &amp;lt;password&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;Open up a new instance of Quasselclient, add the server and user information, and set it up just like before. &lt;/p&gt;
-&lt;p&gt;Boom, you now have a persistent IRC connection!&lt;/p&gt;
-&lt;h1 id=&quot;NOTE&quot;&gt;&lt;a href=&quot;#NOTE&quot; class=&quot;headerlink&quot; title=&quot;NOTE:&quot;&gt;&lt;/a&gt;NOTE:&lt;/h1&gt;&lt;p&gt;If your SQlite database gets too big for your liking you can reduce its size using &lt;a href=&quot;https://gist.github.com/ddrown/d7d2abbdf533b058a0c4&quot;&gt;this&lt;/a&gt; script or this &lt;a href=&quot;https://gist.github.com/Taverius/1f7f2d61d8469dec2ce9&quot;&gt;other script that includes making a backup&lt;/a&gt;. &lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://gist.github.com/Und3rf10w/36a2034cb2c8eafbfb801c1a89e1f8bc&quot;&gt;Here&lt;/a&gt; is a weekly purge.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://gist.github.com/Furyhunter/7d5649eac69541ac783c&quot;&gt;Another&lt;/a&gt; method, this time running an sqlite command.&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Quassel IRC is a modern, cross platform, distrubuted IRC client. It requires users to set up both the server (QuasselreCore) and a client
-    
-    </summary>
-    
-    
-      <category term="irc" scheme="jacksonjs.github.io/tags/irc/"/>
-    
-      <category term="vps" scheme="jacksonjs.github.io/tags/vps/"/>
-    
-      <category term="quassel" scheme="jacksonjs.github.io/tags/quassel/"/>
-    
-      <category term="SQLite" scheme="jacksonjs.github.io/tags/SQLite/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Creating a Twitter Bot with Node.js</title>
-    <link href="jacksonjs.github.io/2016/07/09/twitterBot/"/>
-    <id>jacksonjs.github.io/2016/07/09/twitterBot/</id>
-    <published>2016-07-10T03:33:59.000Z</published>
-    <updated>2016-07-21T01:12:26.716Z</updated>
+    <link href="jacksonjs.github.io/2016/07/24/twitterBot/"/>
+    <id>jacksonjs.github.io/2016/07/24/twitterBot/</id>
+    <published>2016-07-25T03:33:59.000Z</published>
+    <updated>2016-07-25T10:06:47.097Z</updated>
     
     <content type="html">&lt;p&gt; I am a huge fan of the television program &lt;a href=&quot;http://abc.go.com/shows/shark-tank&quot;&gt;Shark Tank&lt;/a&gt;. To have more fun watching it, I decided to make a twitter bot that would retweet anything that included the searchable hashtag &lt;a href=&quot;https://twitter.com/search?q=%23SharkTank&amp;amp;src=tyah&quot;&gt;#SharkTank&lt;/a&gt;. &lt;/p&gt;
 &lt;p&gt;This wasn’t a very hard of a project, there are already many tutorials and boiler plates for getting a bot up and running on Node.js with the Twitter API. You can find the source code to my bot &lt;a href=&quot;https://github.com/JacksonJS/sharkTankBot&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
@@ -111,45 +59,11 @@
   </entry>
   
   <entry>
-    <title>Podcasts</title>
-    <link href="jacksonjs.github.io/2016/07/06/podcasts/"/>
-    <id>jacksonjs.github.io/2016/07/06/podcasts/</id>
-    <published>2016-07-07T05:57:30.000Z</published>
-    <updated>2016-07-21T00:43:53.188Z</updated>
-    
-    <content type="html">&lt;p&gt;I listen to a few podcasts when I go running and sometimes when I am browsing the web. I find it a great way to stay informed about new developments in devops and web development. Listening to people much more experienced than myself helps me learn about methodologies, products, and planning strategies that I would not have heard of otherwise. Here are some of the technology  podcasts that i enjoy the most.&lt;/p&gt;
-&lt;h3 id=&quot;Complete-Developer-Podcast&quot;&gt;&lt;a href=&quot;#Complete-Developer-Podcast&quot; class=&quot;headerlink&quot; title=&quot;Complete Developer Podcast&quot;&gt;&lt;/a&gt;Complete Developer Podcast&lt;/h3&gt;&lt;p&gt;Complete Developer Podcast: &lt;a href=&quot;http://completedeveloperpodcast.com/&quot;&gt;http://completedeveloperpodcast.com/&lt;/a&gt;&lt;br&gt;New podcast, extremely helpful  and informative, very educational&lt;/p&gt;
-&lt;h3 id=&quot;Jupiter-Broadcasting&quot;&gt;&lt;a href=&quot;#Jupiter-Broadcasting&quot; class=&quot;headerlink&quot; title=&quot;Jupiter Broadcasting&quot;&gt;&lt;/a&gt;Jupiter Broadcasting&lt;/h3&gt;&lt;p&gt;Coder Radio: &lt;a href=&quot;http://www.jupiterbroadcasting.com/show/coderradio/&quot;&gt;http://www.jupiterbroadcasting.com/show/coderradio/&lt;/a&gt;&lt;br&gt;Linux Unplugged: &lt;a href=&quot;http://www.jupiterbroadcasting.com/show/linuxun/&quot;&gt;http://www.jupiterbroadcasting.com/show/linuxun/&lt;/a&gt;&lt;br&gt;Linux Action show: &lt;a href=&quot;http://www.jupiterbroadcasting.com/show/linuxactionshow&quot;&gt;http://www.jupiterbroadcasting.com/show/linuxactionshow&lt;/a&gt;&lt;br&gt;Linux focused tech podcasts: &lt;a href=&quot;http://www.jupiterbroadcasting.com/&quot;&gt;http://www.jupiterbroadcasting.com/&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Software-Engineering-Daily&quot;&gt;&lt;a href=&quot;#Software-Engineering-Daily&quot; class=&quot;headerlink&quot; title=&quot;Software Engineering Daily&quot;&gt;&lt;/a&gt;Software Engineering Daily&lt;/h3&gt;&lt;p&gt;Software Engineering Daily: &lt;a href=&quot;http://softwareengineeringdaily.com/&quot;&gt;http://softwareengineeringdaily.com/&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Devchat-tv&quot;&gt;&lt;a href=&quot;#Devchat-tv&quot; class=&quot;headerlink&quot; title=&quot;Devchat.tv&quot;&gt;&lt;/a&gt;Devchat.tv&lt;/h3&gt;&lt;p&gt;Javascript Jabber: &lt;a href=&quot;https://devchat.tv/js-jabber&quot;&gt;https://devchat.tv/js-jabber&lt;/a&gt;&lt;br&gt;Several great tech podcasts: &lt;a href=&quot;https://devchat.tv/&quot;&gt;https://devchat.tv/&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Spec-fm&quot;&gt;&lt;a href=&quot;#Spec-fm&quot; class=&quot;headerlink&quot; title=&quot;Spec.fm&quot;&gt;&lt;/a&gt;Spec.fm&lt;/h3&gt;&lt;p&gt;Developer Tea: &lt;a href=&quot;http://spec.fm/podcasts/developer-tea&quot;&gt;http://spec.fm/podcasts/developer-tea&lt;/a&gt;&lt;br&gt;Does Not Compute: &lt;a href=&quot;http://spec.fm/podcasts/does-not-compute&quot;&gt;http://spec.fm/podcasts/does-not-compute&lt;/a&gt;&lt;br&gt;Several great development and design podcasts: &lt;a href=&quot;http://spec.fm/&quot;&gt;http://spec.fm/&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Twit-tv&quot;&gt;&lt;a href=&quot;#Twit-tv&quot; class=&quot;headerlink&quot; title=&quot;Twit.tv&quot;&gt;&lt;/a&gt;Twit.tv&lt;/h3&gt;&lt;p&gt;Security Now!: &lt;a href=&quot;https://www.grc.com/securitynow.htm&quot;&gt;https://www.grc.com/securitynow.html&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;The-Changelog&quot;&gt;&lt;a href=&quot;#The-Changelog&quot; class=&quot;headerlink&quot; title=&quot;The Changelog&quot;&gt;&lt;/a&gt;The Changelog&lt;/h3&gt;&lt;p&gt;The Changelog: &lt;a href=&quot;https://changelog.com/&quot;&gt;https://changelog.com/&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;I listen to a few podcasts when I go running and sometimes when I am browsing the web. I find it a great way to stay informed about new d
-    
-    </summary>
-    
-    
-      <category term="Podcasts" scheme="jacksonjs.github.io/tags/Podcasts/"/>
-    
-      <category term="Linux" scheme="jacksonjs.github.io/tags/Linux/"/>
-    
-      <category term="Development" scheme="jacksonjs.github.io/tags/Development/"/>
-    
-      <category term="Javascript" scheme="jacksonjs.github.io/tags/Javascript/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Let&#39;s Encrypt, Docker, and WordPress</title>
-    <link href="jacksonjs.github.io/2016/07/02/dockerWordpressEncrypt/"/>
-    <id>jacksonjs.github.io/2016/07/02/dockerWordpressEncrypt/</id>
-    <published>2016-07-03T06:00:25.000Z</published>
-    <updated>2016-07-21T00:43:14.764Z</updated>
+    <link href="jacksonjs.github.io/2016/07/20/dockerWordpressEncrypt/"/>
+    <id>jacksonjs.github.io/2016/07/20/dockerWordpressEncrypt/</id>
+    <published>2016-07-21T06:00:25.000Z</published>
+    <updated>2016-07-25T10:04:04.933Z</updated>
     
     <content type="html">&lt;p&gt;I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Seemed challenging.&lt;/p&gt;
 &lt;p&gt;Luckily for me, the project &lt;a href=&quot;https://github.com/steveltn/https-portal&quot;&gt;HTTPS-PORTAL&lt;/a&gt; is is working order and being actively developed! &lt;/p&gt;
@@ -189,6 +103,92 @@
       <category term="Let's Encrypt" scheme="jacksonjs.github.io/tags/Let-s-Encrypt/"/>
     
       <category term="Wordpress" scheme="jacksonjs.github.io/tags/Wordpress/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Quassel IRC</title>
+    <link href="jacksonjs.github.io/2016/07/19/quassel/"/>
+    <id>jacksonjs.github.io/2016/07/19/quassel/</id>
+    <published>2016-07-20T00:32:01.000Z</published>
+    <updated>2016-07-25T10:08:32.312Z</updated>
+    
+    <content type="html">&lt;p&gt;Quassel IRC is a modern, cross platform, distrubuted IRC client. It requires users to set up both the server (QuasselreCore) and a client. The client attaches to the core, which saves all the IRC info. You can create new users that have seperate profiles and channels from each other, allowing multiple people to use the same core without messing up each others settings.&lt;/p&gt;
+&lt;p&gt;I will assume you have an ubuntu 14.04 Digital Ocean droplet to install your Quasselcore. When we install, we will be using the SQlite database so that we can use the manaers.py script later to add and manage multiple users.&lt;/p&gt;
+&lt;p&gt;SSH into your &lt;strong&gt;server&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Add repository&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo add-apt-repository ppa:mamarley/quassel&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get update&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install quassel-core&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Check that Quasselcore is running (I’m using sudo to display the process name)&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo netstat -tulpn&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;Output should be almost identical to:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;tcp6       0      0 :::4242                 :::*                    LISTEN      764/quasselcore&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;On &lt;strong&gt;client&lt;/strong&gt; computer, add repo:&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;sudo add-apt-repository ppa:mamarley/quassel&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get update&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;sudo apt-get install quasselclient&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Connect your Quassel Client to your server and follow the setup wizard.&lt;/p&gt;
+&lt;p&gt;Create Admin User:&lt;br&gt;&lt;img src=&quot;./../quassel/createAdmin.png&quot; alt=&quot;setup_core&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Use the default sqlite database:&lt;br&gt;&lt;img src=&quot;./../quassel/selectStorage.png&quot; alt=&quot;selectStorage&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Accept the self-signed certificate:&lt;br&gt;&lt;img src=&quot;./../quassel/accpet_untrusted_cert.png&quot; alt=&quot;accept_untrusted_cert&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Add core accounts:&lt;br&gt;&lt;img src=&quot;./../quassel/setup_core.png&quot; alt=&quot;setup_core&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;./../quassel/setup_core_account_edit.png&quot; alt=&quot;setup_account&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Setup your networks:&lt;br&gt;&lt;img src=&quot;./../quassel/setup_network.png&quot; alt=&quot;setupNetwork&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Now we will configure Quassel to add users. We cannot do this in the gui, we must do it as root in the core. &lt;/p&gt;
+&lt;p&gt;First, logout of Quassel on your devices (just to play it safe so we don’t have to do an entire reinstallation).&lt;/p&gt;
+&lt;p&gt;In your VPS, go to /var/lib/quassel/&lt;/p&gt;
+&lt;p&gt;Copy the manageusers.py file from &lt;a href=&quot;https://github.com/eugeii/quassel-manage-users&quot;&gt;this GitHub repo&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Run the script.&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;./manageusers.py &amp;lt;user&amp;gt; &amp;lt;password&amp;gt;&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;Open up a new instance of Quasselclient, add the server and user information, and set it up just like before. &lt;/p&gt;
+&lt;p&gt;Boom, you now have a persistent IRC connection!&lt;/p&gt;
+&lt;h1 id=&quot;NOTE&quot;&gt;&lt;a href=&quot;#NOTE&quot; class=&quot;headerlink&quot; title=&quot;NOTE:&quot;&gt;&lt;/a&gt;NOTE:&lt;/h1&gt;&lt;p&gt;If your SQlite database gets too big for your liking you can reduce its size using &lt;a href=&quot;https://gist.github.com/ddrown/d7d2abbdf533b058a0c4&quot;&gt;this&lt;/a&gt; script or this &lt;a href=&quot;https://gist.github.com/Taverius/1f7f2d61d8469dec2ce9&quot;&gt;other script that includes making a backup&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://gist.github.com/Und3rf10w/36a2034cb2c8eafbfb801c1a89e1f8bc&quot;&gt;Here&lt;/a&gt; is a weekly purge.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://gist.github.com/Furyhunter/7d5649eac69541ac783c&quot;&gt;Another&lt;/a&gt; method, this time running an sqlite command.&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Quassel IRC is a modern, cross platform, distrubuted IRC client. It requires users to set up both the server (QuasselreCore) and a client
+    
+    </summary>
+    
+    
+      <category term="SQLite" scheme="jacksonjs.github.io/tags/SQLite/"/>
+    
+      <category term="IRC" scheme="jacksonjs.github.io/tags/IRC/"/>
+    
+      <category term="VPS" scheme="jacksonjs.github.io/tags/VPS/"/>
+    
+      <category term="Quassel" scheme="jacksonjs.github.io/tags/Quassel/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Podcasts</title>
+    <link href="jacksonjs.github.io/2016/07/10/podcasts/"/>
+    <id>jacksonjs.github.io/2016/07/10/podcasts/</id>
+    <published>2016-07-11T05:57:30.000Z</published>
+    <updated>2016-07-25T10:07:17.797Z</updated>
+    
+    <content type="html">&lt;p&gt;I listen to a few podcasts when I go running and sometimes when I am browsing the web. I find it a great way to stay informed about new developments in devops and web development. Listening to people much more experienced than myself helps me learn about methodologies, products, and planning strategies that I would not have heard of otherwise. Here are some of the technology  podcasts that i enjoy the most.&lt;/p&gt;
+&lt;h3 id=&quot;Complete-Developer-Podcast&quot;&gt;&lt;a href=&quot;#Complete-Developer-Podcast&quot; class=&quot;headerlink&quot; title=&quot;Complete Developer Podcast&quot;&gt;&lt;/a&gt;Complete Developer Podcast&lt;/h3&gt;&lt;p&gt;Complete Developer Podcast: &lt;a href=&quot;http://completedeveloperpodcast.com/&quot;&gt;http://completedeveloperpodcast.com/&lt;/a&gt;&lt;br&gt;New podcast, extremely helpful  and informative, very educational&lt;/p&gt;
+&lt;h3 id=&quot;Jupiter-Broadcasting&quot;&gt;&lt;a href=&quot;#Jupiter-Broadcasting&quot; class=&quot;headerlink&quot; title=&quot;Jupiter Broadcasting&quot;&gt;&lt;/a&gt;Jupiter Broadcasting&lt;/h3&gt;&lt;p&gt;Coder Radio: &lt;a href=&quot;http://www.jupiterbroadcasting.com/show/coderradio/&quot;&gt;http://www.jupiterbroadcasting.com/show/coderradio/&lt;/a&gt;&lt;br&gt;Linux Unplugged: &lt;a href=&quot;http://www.jupiterbroadcasting.com/show/linuxun/&quot;&gt;http://www.jupiterbroadcasting.com/show/linuxun/&lt;/a&gt;&lt;br&gt;Linux Action show: &lt;a href=&quot;http://www.jupiterbroadcasting.com/show/linuxactionshow&quot;&gt;http://www.jupiterbroadcasting.com/show/linuxactionshow&lt;/a&gt;&lt;br&gt;Linux focused tech podcasts: &lt;a href=&quot;http://www.jupiterbroadcasting.com/&quot;&gt;http://www.jupiterbroadcasting.com/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Software-Engineering-Daily&quot;&gt;&lt;a href=&quot;#Software-Engineering-Daily&quot; class=&quot;headerlink&quot; title=&quot;Software Engineering Daily&quot;&gt;&lt;/a&gt;Software Engineering Daily&lt;/h3&gt;&lt;p&gt;Software Engineering Daily: &lt;a href=&quot;http://softwareengineeringdaily.com/&quot;&gt;http://softwareengineeringdaily.com/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Devchat-tv&quot;&gt;&lt;a href=&quot;#Devchat-tv&quot; class=&quot;headerlink&quot; title=&quot;Devchat.tv&quot;&gt;&lt;/a&gt;Devchat.tv&lt;/h3&gt;&lt;p&gt;Javascript Jabber: &lt;a href=&quot;https://devchat.tv/js-jabber&quot;&gt;https://devchat.tv/js-jabber&lt;/a&gt;&lt;br&gt;Several great tech podcasts: &lt;a href=&quot;https://devchat.tv/&quot;&gt;https://devchat.tv/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Spec-fm&quot;&gt;&lt;a href=&quot;#Spec-fm&quot; class=&quot;headerlink&quot; title=&quot;Spec.fm&quot;&gt;&lt;/a&gt;Spec.fm&lt;/h3&gt;&lt;p&gt;Developer Tea: &lt;a href=&quot;http://spec.fm/podcasts/developer-tea&quot;&gt;http://spec.fm/podcasts/developer-tea&lt;/a&gt;&lt;br&gt;Does Not Compute: &lt;a href=&quot;http://spec.fm/podcasts/does-not-compute&quot;&gt;http://spec.fm/podcasts/does-not-compute&lt;/a&gt;&lt;br&gt;Several great development and design podcasts: &lt;a href=&quot;http://spec.fm/&quot;&gt;http://spec.fm/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Twit-tv&quot;&gt;&lt;a href=&quot;#Twit-tv&quot; class=&quot;headerlink&quot; title=&quot;Twit.tv&quot;&gt;&lt;/a&gt;Twit.tv&lt;/h3&gt;&lt;p&gt;Security Now!: &lt;a href=&quot;https://www.grc.com/securitynow.htm&quot;&gt;https://www.grc.com/securitynow.html&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;The-Changelog&quot;&gt;&lt;a href=&quot;#The-Changelog&quot; class=&quot;headerlink&quot; title=&quot;The Changelog&quot;&gt;&lt;/a&gt;The Changelog&lt;/h3&gt;&lt;p&gt;The Changelog: &lt;a href=&quot;https://changelog.com/&quot;&gt;https://changelog.com/&lt;/a&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I listen to a few podcasts when I go running and sometimes when I am browsing the web. I find it a great way to stay informed about new d
+    
+    </summary>
+    
+    
+      <category term="Podcasts" scheme="jacksonjs.github.io/tags/Podcasts/"/>
+    
+      <category term="Linux" scheme="jacksonjs.github.io/tags/Linux/"/>
+    
+      <category term="Development" scheme="jacksonjs.github.io/tags/Development/"/>
+    
+      <category term="Javascript" scheme="jacksonjs.github.io/tags/Javascript/"/>
     
   </entry>
   

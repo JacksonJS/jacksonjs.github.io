@@ -2,9 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>jacksonjs.github.io/2016/07/19/quassel/</loc>
+    
+    <lastmod>2016-07-25T10:08:32.312Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>jacksonjs.github.io/2016/07/10/podcasts/</loc>
+    
+    <lastmod>2016-07-25T10:07:17.797Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>jacksonjs.github.io/2016/07/24/twitterBot/</loc>
+    
+    <lastmod>2016-07-25T10:06:47.097Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>jacksonjs.github.io/2016/07/20/dockerWordpressEncrypt/</loc>
+    
+    <lastmod>2016-07-25T10:04:04.933Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>jacksonjs.github.io/myTechStack/index.html</loc>
     
-    <lastmod>2016-07-22T19:44:09.806Z</lastmod>
+    <lastmod>2016-07-24T00:32:50.231Z</lastmod>
     
   </url>
   
@@ -12,34 +40,6 @@
     <loc>jacksonjs.github.io/about/index.html</loc>
     
     <lastmod>2016-07-22T17:38:55.492Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>jacksonjs.github.io/2016/07/09/twitterBot/</loc>
-    
-    <lastmod>2016-07-21T01:12:26.716Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>jacksonjs.github.io/2016/07/06/podcasts/</loc>
-    
-    <lastmod>2016-07-21T00:43:53.188Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>jacksonjs.github.io/2016/07/02/dockerWordpressEncrypt/</loc>
-    
-    <lastmod>2016-07-21T00:43:14.764Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>jacksonjs.github.io/2016/07/19/quassel/</loc>
-    
-    <lastmod>2016-07-20T10:31:18.628Z</lastmod>
     
   </url>
   
