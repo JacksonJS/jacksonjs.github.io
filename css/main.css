@@ -20,6 +20,7 @@ p a {
 h1,h2,h3,h4,h5,h6 {
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 800;
+  font-size: 3.2vw;
 }
 a {
   color: #008AFF;
@@ -446,7 +447,7 @@ footer .theme-by {
   display: none;
 }
 -@media only screen and (max-width: 365px) {
-+@media only screen and (max-width: 220px) 
++@media only screen and (max-width: 320px) 
   .header-section.has-img .intro-header.no-img {
     display: block;
   }
