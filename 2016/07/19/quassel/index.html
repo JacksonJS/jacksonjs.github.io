@@ -124,7 +124,7 @@
     <p class="page-title-sub">
       <span id = "post-title-date">Created at 2016-07-19</span>
       
-        <span id = "post-title-updated">Updated at 2016-07-25</span>
+        <span id = "post-title-updated">Updated at 2016-07-30</span>
       
       
       
@@ -162,11 +162,11 @@
 <p>I will assume you have an ubuntu 14.04 Digital Ocean droplet to install your Quasselcore. When we install, we will be using the SQlite database so that we can use the manaers.py script later to add and manage multiple users.</p>
 <p>SSH into your <strong>server</strong>.</p>
 <p>Add repository</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:mamarley/quassel</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install quassel-core</div></pre></td></tr></table></figure>
-<p>Check that Quasselcore is running (I’m using sudo to display the process name)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo netstat -tulpn</div></pre></td></tr></table></figure></p>
-<p>Output should be almost identical to:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcp6       0      0 :::4242                 :::*                    LISTEN      764/quasselcore</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:mamarley/quassel</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install quassel-core</div></pre></td></tr></table></figure>
+<p>Check that Quasselcore is running (I’m using sudo to display the process name)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo netstat -tulpn</div></pre></td></tr></table></figure></p>
+<p>Output should be almost identical to:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcp6       0      0 :::4242                 :::*                    LISTEN      764/quasselcore</div></pre></td></tr></table></figure></p>
 <p>On <strong>client</strong> computer, add repo:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:mamarley/quassel</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install quasselclient</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:mamarley/quassel</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install quasselclient</div></pre></td></tr></table></figure>
 <p>Connect your Quassel Client to your server and follow the setup wizard.</p>
 <p>Create Admin User:<br><img src="./../quassel/createAdmin.png" alt="setup_core"></p>
 <p>Use the default sqlite database:<br><img src="./../quassel/selectStorage.png" alt="selectStorage"></p>
@@ -178,7 +178,7 @@
 <p>First, logout of Quassel on your devices (just to play it safe so we don’t have to do an entire reinstallation).</p>
 <p>In your VPS, go to /var/lib/quassel/</p>
 <p>Copy the manageusers.py file from <a href="https://github.com/eugeii/quassel-manage-users">this GitHub repo</a></p>
-<p>Run the script.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./manageusers.py &lt;user&gt; &lt;password&gt;</div></pre></td></tr></table></figure></p>
+<p>Run the script.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./manageusers.py &lt;user&gt; &lt;password&gt;</div></pre></td></tr></table></figure></p>
 <p>Open up a new instance of Quasselclient, add the server and user information, and set it up just like before. </p>
 <p>Boom, you now have a persistent IRC connection!</p>
 <h1 id="NOTE"><a href="#NOTE" class="headerlink" title="NOTE:"></a>NOTE:</h1><p>If your SQlite database gets too big for your liking you can reduce its size using <a href="https://gist.github.com/ddrown/d7d2abbdf533b058a0c4">this</a> script or this <a href="https://gist.github.com/Taverius/1f7f2d61d8469dec2ce9">other script that includes making a backup</a>. </p>
@@ -266,7 +266,7 @@ s.setAttribute('data-timestamp', +new Date());
   
   
     <li>
-      <a href="https://github.com/stiekel/hexo-theme-random">
+      <a href="https://github.com/jacksonjs">
         
           <i class="icon iconfont github">&#xe606;</i>
         
