@@ -50,6 +50,63 @@
   </entry>
   
   <entry>
+    <title>Let&#39;s Encrypt, Docker, and WordPress</title>
+    <link href="https://jacksonjs.github.io/2016/07/29/dockerWordpressEncrypt/"/>
+    <id>https://jacksonjs.github.io/2016/07/29/dockerWordpressEncrypt/</id>
+    <published>2016-07-30T06:00:25.000Z</published>
+    <updated>2016-08-01T12:23:14.160Z</updated>
+    
+    <content type="html"><![CDATA[<p>I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Seemed challenging.</p>
+<p>Luckily for me, the project <a href="https://github.com/steveltn/https-portal">HTTPS-PORTAL</a> is is working order and being actively developed! </p>
+<p>Using <a href="https://letsencrypt.org/">Let’s Encrypt’s</a> certificate automation, I was able to set up an HTTPS wordpress install in under five minutes. Here are some reasons why sites should be using HTTPS:</p>
+<ul>
+<li><p>HTTPS helps prevent intruders from tampering with the communications between your websites and your users’ browsers. Intruders include intentionally malicious attackers, and legitimate but intrusive companies, such as ISPs or hotels that inject ads into pages.</p>
+</li>
+<li><p>HTTPS prevents intruders from being able to passively listen in on the communications between your websites and your users.</p>
+</li>
+<li><p>It is much cheaper and faster to imlement because of the Let’s Encrypt project!</p>
+</li>
+</ul>
+<p>I followed <a href="http://steveltn.me/2015/12/18/nginx-acme/">this tutorial </a> to get me up and running with my wordpress install. I had some problems understanding how to write a docker-compose file, but the blog author was very quick in helping to correct my mistakes. </p>
+<p>Here is what my docker-compose.yml file contained, minus the real password:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># docker-compose.yml for my_wordpress site</span></div><div class="line"></div><div class="line">https-portal:</div><div class="line">  image: steveltn/https-portal</div><div class="line">  ports:</div><div class="line">    - 80:80</div><div class="line">    - 443:443</div><div class="line">  links:</div><div class="line">    - wordpress</div><div class="line">  environment:</div><div class="line">    - <span class="string">"DOMAINS=containerize.us -&gt; http://wordpress"</span> <span class="comment">#maps https-portal to the wordpress image</span></div><div class="line">    - <span class="string">"PRODUCTION=true"</span> <span class="comment">#ensures that the certificate will be recognized as valid by web browsers</span></div><div class="line"></div><div class="line">wordpress:</div><div class="line">  image: wordpress</div><div class="line">  links:</div><div class="line">    - db:mysql</div><div class="line"></div><div class="line">db:</div><div class="line">  image: mariadb</div><div class="line">  ports:</div><div class="line">    - 3306:3306</div><div class="line">  environment:</div><div class="line">    MYSQL_ROOT_PASSWORD: <span class="string">'&lt;secure_password&gt;'</span></div></pre></td></tr></table></figure>
+<p>In the docker-compose.yml directory, run the command to start the containers:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up</div></pre></td></tr></table></figure>
+<p>After the server generates a TLS Diffie-Hellman key and spins up the WordPress instance, we have our WordPress site installed! </p>
+<p>Now let’s insert some media. While you could just embed everything from an external site like youtube and imagur, it is nice to have the option to host your own assets.  Right now, the upload limit is a puny 2MB. Let’s change it to 64MB.</p>
+<p>To enter the running container, type:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker <span class="built_in">exec</span> -i -t mywordpress_wordpress_1 bash</div></pre></td></tr></table></figure>
+<p>To install the nano text editor, type:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apt-get update</div><div class="line">apt-get install nano</div></pre></td></tr></table></figure></p>
+<p>Create the file php.ini in you WordPress root directory.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi php.ini</div></pre></td></tr></table></figure></p>
+<p>Once in, paste these lines:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">upload_max_filesize = 64M</div><div class="line">post_max_size = 64M</div><div class="line">memory_<span class="built_in">limit</span> = 64M</div></pre></td></tr></table></figure></p>
+<p>Stop the running containers…<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose stop</div></pre></td></tr></table></figure></p>
+<p>And restart them in detatched mode</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up <span class="_">-d</span></div></pre></td></tr></table></figure>
+<p>Hooray, our upload limit is now increased! We can now upload media up to 64MB.</p>
+<p>You can visit the site I generated this way at <a href="https://news.containerize.us">https://news.containerize.us</a></p>
+<p>Also, using keys a generate with HTTPS-PORTAL, I created a <a href="https://www.mattermost.org/">Mattermost</a> instance <a href="https://plz.containerize.us:4430">here</a>. </p>
+<h3 id="Click-here-to-join-the-Containers-group"><a href="#Click-here-to-join-the-Containers-group" class="headerlink" title="Click here to join the Containers group."></a><a href="https://plz.containerize.us:4430/signup_user_complete/?id=xdea87cuw7ripqc6ib5995ep9y">Click here to join the Containers group.</a></h3>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker 
+    
+    </summary>
+    
+    
+      <category term="Docker" scheme="https://jacksonjs.github.io/tags/docker/"/>
+    
+      <category term="Let&#39;s Encrypt" scheme="https://jacksonjs.github.io/tags/let-s-encrypt/"/>
+    
+      <category term="Wordpress" scheme="https://jacksonjs.github.io/tags/wordpress/"/>
+    
+      <category term="Mattermost" scheme="https://jacksonjs.github.io/tags/mattermost/"/>
+    
+      <category term="NGINX" scheme="https://jacksonjs.github.io/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Creating a Twitter Bot with Node.js</title>
     <link href="https://jacksonjs.github.io/2016/07/24/twitterBot/"/>
     <id>https://jacksonjs.github.io/2016/07/24/twitterBot/</id>
@@ -90,58 +147,6 @@
       <category term="Twitter" scheme="https://jacksonjs.github.io/tags/twitter/"/>
     
       <category term="API" scheme="https://jacksonjs.github.io/tags/api/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Let&#39;s Encrypt, Docker, and WordPress</title>
-    <link href="https://jacksonjs.github.io/2016/07/20/dockerWordpressEncrypt/"/>
-    <id>https://jacksonjs.github.io/2016/07/20/dockerWordpressEncrypt/</id>
-    <published>2016-07-21T06:00:25.000Z</published>
-    <updated>2016-07-31T01:19:20.146Z</updated>
-    
-    <content type="html"><![CDATA[<p>I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Seemed challenging.</p>
-<p>Luckily for me, the project <a href="https://github.com/steveltn/https-portal">HTTPS-PORTAL</a> is is working order and being actively developed! </p>
-<p>Using <a href="https://letsencrypt.org/">Let’s Encrypt’s</a> certificate automation, I was able to set up an HTTPS wordpress install in under five minutes. Here are some reasons why sites should be using HTTPS:</p>
-<ul>
-<li><p>HTTPS helps prevent intruders from tampering with the communications between your websites and your users’ browsers. Intruders include intentionally malicious attackers, and legitimate but intrusive companies, such as ISPs or hotels that inject ads into pages.</p>
-</li>
-<li><p>HTTPS prevents intruders from being able to passively listen in on the communications between your websites and your users.</p>
-</li>
-<li><p>It is much cheaper and faster to imlement because of the Let’s Encrypt project!</p>
-</li>
-</ul>
-<p>I followed <a href="https://steveltn.me/2015/12/18/nginx-acme/">this tutorial </a> (currently offline 😔) to get me up and running with my wordpress install. I had some problems understanding how to write a docker-compose file, but the blog author was very quick in helping to correct my mistakes. </p>
-<p>Here is what my docker-compose.yml file contained, minus the real password:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># docker-compose.yml for my_wordpress site</span></div><div class="line"></div><div class="line">https-portal:</div><div class="line">  image: steveltn/https-portal</div><div class="line">  ports:</div><div class="line">    - 80:80</div><div class="line">    - 443:443</div><div class="line">  links:</div><div class="line">    - wordpress</div><div class="line">  environment:</div><div class="line">    - <span class="string">"DOMAINS=containerize.us -&gt; http://wordpress"</span> <span class="comment">#maps https-portal to the wordpress image</span></div><div class="line">    - <span class="string">"PRODUCTION=true"</span> <span class="comment">#ensures that the certificate will be recognized as valid by web browsers</span></div><div class="line"></div><div class="line">wordpress:</div><div class="line">  image: wordpress</div><div class="line">  links:</div><div class="line">    - db:mysql</div><div class="line"></div><div class="line">db:</div><div class="line">  image: mariadb</div><div class="line">  ports:</div><div class="line">    - 3306:3306</div><div class="line">  environment:</div><div class="line">    MYSQL_ROOT_PASSWORD: <span class="string">'&lt;secure_password&gt;'</span></div></pre></td></tr></table></figure>
-<p>In the docker-compose.yml directory, run the command to start the containers:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up</div></pre></td></tr></table></figure>
-<p>After the server generates a TLS Diffie-Hellman key and spins up the WordPress instance, we have our WordPress site installed! </p>
-<p>Now let’s insert some media. While you could just embed everything from an external site like youtube and imagur, it is nice to have the option to host your own assets.  Right now, the upload limit is a puny 2MB. Let’s change it to 64MB.</p>
-<p>To enter the running container, type:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker <span class="built_in">exec</span> -i -t mywordpress_wordpress_1 bash</div></pre></td></tr></table></figure>
-<p>To install the nano text editor, type:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apt-get update</div><div class="line">apt-get install nano</div></pre></td></tr></table></figure></p>
-<p>Create the file php.ini in you WordPress root directory.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi php.ini</div></pre></td></tr></table></figure></p>
-<p>Once in, paste these lines:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">upload_max_filesize = 64M</div><div class="line">post_max_size = 64M</div><div class="line">memory_<span class="built_in">limit</span> = 64M</div></pre></td></tr></table></figure></p>
-<p>Stop the running containers…<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose stop</div></pre></td></tr></table></figure></p>
-<p>And restart them in detatched mode</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up <span class="_">-d</span></div></pre></td></tr></table></figure>
-<p>Hooray, our upload limit is now increased! We can now upload media up to 64MB.</p>
-<p>You can visit the site I generated this way at <a href="https://containerize.us">https://containerize.us</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker 
-    
-    </summary>
-    
-    
-      <category term="Docker" scheme="https://jacksonjs.github.io/tags/docker/"/>
-    
-      <category term="Let&#39;s Encrypt" scheme="https://jacksonjs.github.io/tags/let-s-encrypt/"/>
-    
-      <category term="Wordpress" scheme="https://jacksonjs.github.io/tags/wordpress/"/>
     
   </entry>
   

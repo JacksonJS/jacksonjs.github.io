@@ -41,21 +41,21 @@ Luckily for me, the project H...">
 <div class="side-navigate hide-area">
   
     <div class="item prev">
-      <a href="/2016/07/24/twitterBot/">
+      <a href="/2016/08/01/google-drive-ocamlfuse/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        Creating a Twitter Bot with Node.js
+        Mounting Google Drive on the Linux Desktop
       </div>
     </div>
   
   
     <div class="item next">
-      <a href="/2016/07/19/quassel/">
+      <a href="/2016/07/24/twitterBot/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
-        Quassel IRC
+        Creating a Twitter Bot with Node.js
       </div>
     </div>
   
@@ -125,9 +125,9 @@ Luckily for me, the project H...">
   <article id="post">
     <h1>Let's Encrypt, Docker, and WordPress</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2016-07-20</span>
+      <span id = "post-title-date">Created at 2016-07-29</span>
       
-        <span id = "post-title-updated">Updated at 2016-07-30</span>
+        <span id = "post-title-updated">Updated at 2016-08-01</span>
       
       
       
@@ -151,6 +151,18 @@ Luckily for me, the project H...">
         
         <a href="/tags/wordpress/">Wordpress</a>
       
+        
+          /
+        
+        
+        <a href="/tags/mattermost/">Mattermost</a>
+      
+        
+          /
+        
+        
+        <a href="/tags/nginx/">NGINX</a>
+      
       </span>
       
     </p>
@@ -166,7 +178,7 @@ Luckily for me, the project H...">
 <li><p>It is much cheaper and faster to imlement because of the Let’s Encrypt project!</p>
 </li>
 </ul>
-<p>I followed <a href="https://steveltn.me/2015/12/18/nginx-acme/">this tutorial </a> (currently offline 😔) to get me up and running with my wordpress install. I had some problems understanding how to write a docker-compose file, but the blog author was very quick in helping to correct my mistakes. </p>
+<p>I followed <a href="http://steveltn.me/2015/12/18/nginx-acme/">this tutorial </a> to get me up and running with my wordpress install. I had some problems understanding how to write a docker-compose file, but the blog author was very quick in helping to correct my mistakes. </p>
 <p>Here is what my docker-compose.yml file contained, minus the real password:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># docker-compose.yml for my_wordpress site</span></div><div class="line"></div><div class="line">https-portal:</div><div class="line">  image: steveltn/https-portal</div><div class="line">  ports:</div><div class="line">    - 80:80</div><div class="line">    - 443:443</div><div class="line">  links:</div><div class="line">    - wordpress</div><div class="line">  environment:</div><div class="line">    - <span class="string">"DOMAINS=containerize.us -&gt; http://wordpress"</span> <span class="comment">#maps https-portal to the wordpress image</span></div><div class="line">    - <span class="string">"PRODUCTION=true"</span> <span class="comment">#ensures that the certificate will be recognized as valid by web browsers</span></div><div class="line"></div><div class="line">wordpress:</div><div class="line">  image: wordpress</div><div class="line">  links:</div><div class="line">    - db:mysql</div><div class="line"></div><div class="line">db:</div><div class="line">  image: mariadb</div><div class="line">  ports:</div><div class="line">    - 3306:3306</div><div class="line">  environment:</div><div class="line">    MYSQL_ROOT_PASSWORD: <span class="string">'&lt;secure_password&gt;'</span></div></pre></td></tr></table></figure>
 <p>In the docker-compose.yml directory, run the command to start the containers:</p>
@@ -182,28 +194,29 @@ Luckily for me, the project H...">
 <p>And restart them in detatched mode</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up <span class="_">-d</span></div></pre></td></tr></table></figure>
 <p>Hooray, our upload limit is now increased! We can now upload media up to 64MB.</p>
-<p>You can visit the site I generated this way at <a href="https://containerize.us">https://containerize.us</a></p>
-
+<p>You can visit the site I generated this way at <a href="https://news.containerize.us">https://news.containerize.us</a></p>
+<p>Also, using keys a generate with HTTPS-PORTAL, I created a <a href="https://www.mattermost.org/">Mattermost</a> instance <a href="https://plz.containerize.us:4430">here</a>. </p>
+<h3 id="Click-here-to-join-the-Containers-group"><a href="#Click-here-to-join-the-Containers-group" class="headerlink" title="Click here to join the Containers group."></a><a href="https://plz.containerize.us:4430/signup_user_complete/?id=xdea87cuw7ripqc6ib5995ep9y">Click here to join the Containers group.</a></h3>
   </article>
   <div class="random-toc-area">
   <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Click-here-to-join-the-Containers-group"><span class="toc-text">Click here to join the Containers group.</span></a></li></ol>
   </div>
 </div>
 
   
 <nav id="pagination">
   
-    <a href="/2016/07/24/twitterBot/" class="prev">&larr; Prev post Creating a Twitter Bot with Node.js</a>
+    <a href="/2016/08/01/google-drive-ocamlfuse/" class="prev">&larr; Prev post Mounting Google Drive on the Linux Desktop</a>
   
 
   
 
   
-    <a href="/2016/07/19/quassel/" class="next">Next post Quassel IRC &rarr;</a>
+    <a href="/2016/07/24/twitterBot/" class="next">Next post Creating a Twitter Bot with Node.js &rarr;</a>
   
 </nav>
 
