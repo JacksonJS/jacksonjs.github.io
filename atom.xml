@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://jacksonjs.github.io/"/>
-  <updated>2016-08-01T07:35:28.249Z</updated>
+  <updated>2016-08-04T06:04:15.575Z</updated>
   <id>https://jacksonjs.github.io/</id>
   
   <author>
@@ -14,6 +14,96 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>DynDNS</title>
+    <link href="https://jacksonjs.github.io/2016/08/03/dyndns/"/>
+    <id>https://jacksonjs.github.io/2016/08/03/dyndns/</id>
+    <published>2016-08-04T05:27:12.000Z</published>
+    <updated>2016-08-04T06:04:15.575Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1"></a>Step 1</h5><p>First we have to get us a free subdomain with DynDNS. Therefore we register us for free at No-IP.com. We are going to be using the free option. </p>
+<h5 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a>Step 2</h5><p>Now we install the  No-IP.com the Dynamic DNS Update client for Linux on our Raspberry Pi and unpack it. He will later check every few minutes to see if the IP address has changed, if so, notify the application this No-IP.com with, so your subdomain refers again to the current IP address of Raspberry Pis.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget http://www.noip.com/client/linux/noip-duc-linux.tar.gz</div><div class="line">tar xf noip-duc-linux.tar.gz</div><div class="line">rm noip-duc-linux.tar.gz</div></pre></td></tr></table></figure>
+<h5 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a>Step 3</h5><p>Rename directory and enter:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mv noip-* noip</div><div class="line"><span class="built_in">cd</span> noip</div></pre></td></tr></table></figure>
+<h5 id="Step-4"><a href="#Step-4" class="headerlink" title="Step 4"></a>Step 4</h5><p>Now we install the application. At the end of this call we are asked for our e-mail address of the No-IP.com account, our password, and the subdomain and the update interval. Here we enter our data.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo make install</div></pre></td></tr></table></figure></p>
+<h5 id="Step-5"><a href="#Step-5" class="headerlink" title="Step 5"></a>Step 5</h5><p>Now we have to start the installed application using the following command.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo noip2</div></pre></td></tr></table></figure></p>
+<h5 id="Step-6"><a href="#Step-6" class="headerlink" title="Step 6"></a>Step 6</h5><p>If you want that the update will start automatically with the client Raspberry Pi and thus always updates the IP, you can to create a crontab.<br><code>crontab -e</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@reboot <span class="built_in">cd</span> /home/pi/noip &amp;&amp; sudo noip2</div></pre></td></tr></table></figure>
+<p>Now forward the ports on whatever web services you will be using with your custom domain </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h5 id=&quot;Step-1&quot;&gt;&lt;a href=&quot;#Step-1&quot; class=&quot;headerlink&quot; title=&quot;Step 1&quot;&gt;&lt;/a&gt;Step 1&lt;/h5&gt;&lt;p&gt;First we have to get us a free subdomain with DynDNS. 
+    
+    </summary>
+    
+    
+      <category term="Dynamic DNS" scheme="https://jacksonjs.github.io/tags/dynamic-dns/"/>
+    
+      <category term="Hosting" scheme="https://jacksonjs.github.io/tags/hosting/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Install Prosody XMPP Server on your Raspberry Pi</title>
+    <link href="https://jacksonjs.github.io/2016/08/03/prosodyonpi/"/>
+    <id>https://jacksonjs.github.io/2016/08/03/prosodyonpi/</id>
+    <published>2016-08-04T04:58:08.000Z</published>
+    <updated>2016-08-04T06:21:38.034Z</updated>
+    
+    <content type="html"><![CDATA[<p>Install Prosody on your Raspberry pi 2 or 3.</p>
+<p>Use <a href="./../dyndns/index.html">this guide</a> to configure dynamic DNS on your raspberry pi if you would like to connect to a named domain. This is most likely essential if you are hosting your pi from your home.</p>
+<p>It’s already in the repositories!<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install prosody</div></pre></td></tr></table></figure></p>
+<p>Generate you self-signed keys:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo su</div><div class="line"><span class="built_in">cd</span> /etc/prosody/certs/</div><div class="line">sudo openssl genrsa -out prosody.key 4096</div><div class="line">sudo openssl req -new -sha256 -key prosody.key -out prosody.csr</div><div class="line">sudo openssl x509 -req -sha256 -days 3650 -in prosody.csr -signkey prosody.key -out prosody.crt</div><div class="line"><span class="built_in">exit</span></div></pre></td></tr></table></figure>
+<p>Now plug in our SSH stuff to encrypt communicatinos on our server. We change this:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">VirtualHost <span class="string">"example.com"</span></div><div class="line">        enabled = <span class="literal">false</span> -- Remove this line to <span class="built_in">enable</span> this host</div><div class="line"> </div><div class="line">        -- Assign this host a certificate <span class="keyword">for</span> TLS, otherwise it would use the one</div><div class="line">        -- <span class="built_in">set</span> <span class="keyword">in</span> the global section (<span class="keyword">if</span> any).</div><div class="line">        -- Note that old-style SSL on port 5223 only supports one certificate, and will always</div><div class="line">        -- use the global one.</div><div class="line">        ssl = &#123;</div><div class="line">                key = <span class="string">"/etc/prosody/certs/example.com.key"</span>;</div><div class="line">                certificate = <span class="string">"/etc/prosody/certs/example.com.crt"</span>;</div><div class="line">        &#125;</div></pre></td></tr></table></figure></p>
+<p>Into this:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">VirtualHost <span class="string">"myIncredibleSiteName.no-ip.org"</span></div><div class="line">        ssl = &#123;</div><div class="line">                key = <span class="string">"/etc/prosody/certs/prosody.key"</span>;</div><div class="line">                certificate = <span class="string">"/etc/prosody/certs/prosody.crt"</span>;</div><div class="line">        &#125;</div></pre></td></tr></table></figure></p>
+<p>Enable multi-user chat, if desired:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Component &quot;conference.example.no-ip.net&quot; &quot;muc&quot;</div><div class="line">``</div><div class="line">`</div><div class="line">Restart to make settings take effect:</div><div class="line">```bash</div><div class="line">sudo /etc/init.d/prosody restart</div></pre></td></tr></table></figure></p>
+<p>Next, we configure our first user. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">prosodyctl adduser admin@example.ddns.net</div></pre></td></tr></table></figure>
+<p>Give the desired password at prompt.</p>
+<p>Now foreward ports <code>5222</code> and <code>5269</code> on your router (Go ahead and foreward 5280 and 5281 as well if you want to upload and store files on your server).</p>
+<p>To view information about your Prosody install, enter:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">prosodyctl about</div></pre></td></tr></table></figure>
+<h1 id="Conversations"><a href="#Conversations" class="headerlink" title="Conversations"></a>Conversations</h1><p>Plug in your user credentials<br>Select Avatar if desired</p>
+<hr>
+<p>Right now we can add contacts and message with them. We can send any type of file, and it is routed and stored on the destination’s phone.</p>
+<p>But what about group messaging? What about syncing message on different devices?</p>
+<hr>
+<p>Go to Manage Accounts, select yours.</p>
+<p>In upper right, check the Server info box.</p>
+<p>We have a lot of cool stuff missing, it’s time we tried enabling it!</p>
+<h1 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h1><p>Let’s enable all of the modules that the Conversations app supports. </p>
+<p>First, install mercurial</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install mercurial</div></pre></td></tr></table></figure>
+<p>Go into <code>/usr/lib/prosody</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hg <span class="built_in">clone</span> https://hg.prosody.im/prosody-modules/ prosody-modules</div></pre></td></tr></table></figure></p>
+<p>In <code>/etc/prosody/prosody.lua.config</code>, add below the admin line <code>plugin_paths = { &quot;/usr/lib/prosody/prosody-modules&quot; }</code></p>
+<p>This is what my modules_enabled portion looks like now:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">modules_enabled = &#123;</div><div class="line"></div><div class="line">  -- Generally required</div><div class="line">    <span class="string">"roster"</span>; -- Allow users to have a roster. Recommended ;)</div><div class="line">    <span class="string">"saslauth"</span>; -- Authentication <span class="keyword">for</span> clients and servers. Recommended <span class="keyword">if</span> you want to <span class="built_in">log</span> in.</div><div class="line">    <span class="string">"tls"</span>; -- Add support <span class="keyword">for</span> secure TLS on c2s/s2s connections</div><div class="line">    <span class="string">"dialback"</span>; -- s2s dialback support</div><div class="line">    <span class="string">"disco"</span>; -- Service discovery</div><div class="line"></div><div class="line">  -- Not essential, but recommended</div><div class="line">    <span class="string">"private"</span>; -- Private XML storage (<span class="keyword">for</span> room bookmarks, etc.)</div><div class="line">    <span class="string">"vcard"</span>; -- Allow users to <span class="built_in">set</span> vCards</div><div class="line">  </div><div class="line">  -- These are commented by default as they have a performance impact</div><div class="line">    --<span class="string">"privacy"</span>; -- Support privacy lists</div><div class="line">    --<span class="string">"compression"</span>; -- Stream compression (Debian: requires lua-zlib module to work)</div><div class="line"></div><div class="line">  -- Nice to have</div><div class="line">    <span class="string">"version"</span>; -- Replies to server version requests</div><div class="line">    <span class="string">"uptime"</span>; -- Report how long server has been running</div><div class="line">    <span class="string">"time"</span>; -- Let others know the time here on this server</div><div class="line">    <span class="string">"ping"</span>; -- Replies to XMPP pings with pongs</div><div class="line">    <span class="string">"pep"</span>; -- Enables users to publish their mood, activity, playing music and more</div><div class="line">    <span class="string">"register"</span>; -- Allow users to register on this server using a client and change passwords</div><div class="line"></div><div class="line">  -- Admin interfaces</div><div class="line">    <span class="string">"admin_adhoc"</span>; -- Allows administration via an XMPP client that supports ad-hoc commands</div><div class="line">    --<span class="string">"admin_telnet"</span>; -- Opens telnet console interface on localhost port 5582</div><div class="line">  </div><div class="line">  -- HTTP modules</div><div class="line">    <span class="string">"bosh"</span>; -- Enable BOSH clients, aka <span class="string">"Jabber over HTTP"</span></div><div class="line">    <span class="string">"http_files"</span>; -- Serve static files from a directory over HTTP</div><div class="line"></div><div class="line">  -- Other specific functionality</div><div class="line">    <span class="string">"posix"</span>; -- POSIX functionality, sends server to background, enables syslog, etc.</div><div class="line">    --<span class="string">"groups"</span>; -- Shared roster support</div><div class="line">    --<span class="string">"announce"</span>; -- Send announcement to all online users</div><div class="line">    --<span class="string">"welcome"</span>; -- Welcome users who register accounts</div><div class="line">    --<span class="string">"watchregistrations"</span>; -- Alert admins of registrations</div><div class="line">    --<span class="string">"motd"</span>; -- Send a message to users when they <span class="built_in">log</span> <span class="keyword">in</span></div><div class="line">    --<span class="string">"legacyauth"</span>; -- Legacy authentication. Only used by some old clients and bots.</div><div class="line">    --</div><div class="line">    --external modules--</div><div class="line">    <span class="string">"carbons"</span>;</div><div class="line">    <span class="string">"mam"</span>;</div><div class="line">    <span class="string">"mam_archive"</span>;</div><div class="line">    <span class="string">"smacks"</span>;</div><div class="line">    <span class="string">"http"</span>;</div><div class="line">    <span class="string">"http_upload"</span>;</div><div class="line">    <span class="string">"http_muc_log"</span>;</div><div class="line">    <span class="string">"csi"</span>;</div><div class="line">    <span class="string">"privacy"</span>;</div><div class="line">    <span class="string">"blocking"</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">--HTTP STUFF-----</div><div class="line">http_ports = &#123; 5280 &#125;</div><div class="line">http_interfaces = &#123; <span class="string">"*"</span> &#125;</div><div class="line"> </div><div class="line">https_ports = &#123; 5281 &#125;</div><div class="line">https_interfaces = &#123; <span class="string">"*"</span> &#125;</div><div class="line">http_upload_file_size_<span class="built_in">limit</span> = 1024 * 1024 * 20 --20MB</div><div class="line"></div><div class="line"> https_ssl = &#123;</div><div class="line">    certificate = <span class="string">"/etc/prosody/certs/prosody.crt"</span>;</div><div class="line">    key = <span class="string">"/etc/prosody/certs/prosody.key"</span>;</div><div class="line">    &#125;</div><div class="line">--END HTTP STUFF------</div></pre></td></tr></table></figure>
+<p>Restart Prosody to enable changes:</p>
+<p><code>sudo /etc/init.d/prosody restart</code></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Install Prosody on your Raspberry pi 2 or 3.&lt;/p&gt;
+&lt;p&gt;Use &lt;a href=&quot;./../dyndns/index.html&quot;&gt;this guide&lt;/a&gt; to configure dynamic DNS on your 
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://jacksonjs.github.io/tags/linux/"/>
+    
+      <category term="XMPP" scheme="https://jacksonjs.github.io/tags/xmpp/"/>
+    
+      <category term="Prosody" scheme="https://jacksonjs.github.io/tags/prosody/"/>
+    
+      <category term="Raspberry Pi" scheme="https://jacksonjs.github.io/tags/raspberry-pi/"/>
+    
+  </entry>
   
   <entry>
     <title>Mounting Google Drive on the Linux Desktop</title>
@@ -41,11 +131,11 @@
     </summary>
     
     
+      <category term="Google-Drive" scheme="https://jacksonjs.github.io/tags/google-drive/"/>
+    
       <category term="Linux" scheme="https://jacksonjs.github.io/tags/linux/"/>
     
       <category term="Desktop" scheme="https://jacksonjs.github.io/tags/desktop/"/>
-    
-      <category term="Google-Drive" scheme="https://jacksonjs.github.io/tags/google-drive/"/>
     
   </entry>
   
@@ -54,9 +144,9 @@
     <link href="https://jacksonjs.github.io/2016/07/29/dockerWordpressEncrypt/"/>
     <id>https://jacksonjs.github.io/2016/07/29/dockerWordpressEncrypt/</id>
     <published>2016-07-30T06:00:25.000Z</published>
-    <updated>2016-08-01T12:23:14.160Z</updated>
+    <updated>2016-08-04T06:13:07.537Z</updated>
     
-    <content type="html"><![CDATA[<p>I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Seemed challenging.</p>
+    <content type="html"><![CDATA[<h5 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h5><p>I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Seemed challenging.</p>
 <p>Luckily for me, the project <a href="https://github.com/steveltn/https-portal">HTTPS-PORTAL</a> is is working order and being actively developed! </p>
 <p>Using <a href="https://letsencrypt.org/">Let’s Encrypt’s</a> certificate automation, I was able to set up an HTTPS wordpress install in under five minutes. Here are some reasons why sites should be using HTTPS:</p>
 <ul>
@@ -68,12 +158,12 @@
 </li>
 </ul>
 <p>I followed <a href="http://steveltn.me/2015/12/18/nginx-acme/">this tutorial </a> to get me up and running with my wordpress install. I had some problems understanding how to write a docker-compose file, but the blog author was very quick in helping to correct my mistakes. </p>
-<p>Here is what my docker-compose.yml file contained, minus the real password:</p>
+<h5 id="Compose"><a href="#Compose" class="headerlink" title="Compose"></a>Compose</h5><p>Here is what my docker-compose.yml file contained, minus the real password:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># docker-compose.yml for my_wordpress site</span></div><div class="line"></div><div class="line">https-portal:</div><div class="line">  image: steveltn/https-portal</div><div class="line">  ports:</div><div class="line">    - 80:80</div><div class="line">    - 443:443</div><div class="line">  links:</div><div class="line">    - wordpress</div><div class="line">  environment:</div><div class="line">    - <span class="string">"DOMAINS=containerize.us -&gt; http://wordpress"</span> <span class="comment">#maps https-portal to the wordpress image</span></div><div class="line">    - <span class="string">"PRODUCTION=true"</span> <span class="comment">#ensures that the certificate will be recognized as valid by web browsers</span></div><div class="line"></div><div class="line">wordpress:</div><div class="line">  image: wordpress</div><div class="line">  links:</div><div class="line">    - db:mysql</div><div class="line"></div><div class="line">db:</div><div class="line">  image: mariadb</div><div class="line">  ports:</div><div class="line">    - 3306:3306</div><div class="line">  environment:</div><div class="line">    MYSQL_ROOT_PASSWORD: <span class="string">'&lt;secure_password&gt;'</span></div></pre></td></tr></table></figure>
 <p>In the docker-compose.yml directory, run the command to start the containers:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up</div></pre></td></tr></table></figure>
 <p>After the server generates a TLS Diffie-Hellman key and spins up the WordPress instance, we have our WordPress site installed! </p>
-<p>Now let’s insert some media. While you could just embed everything from an external site like youtube and imagur, it is nice to have the option to host your own assets.  Right now, the upload limit is a puny 2MB. Let’s change it to 64MB.</p>
+<h5 id="Increase-Upload-Allowance"><a href="#Increase-Upload-Allowance" class="headerlink" title="Increase Upload Allowance"></a>Increase Upload Allowance</h5><p>Now let’s insert some media. While you could just embed everything from an external site like youtube and imagur, it is nice to have the option to host your own assets.  Right now, the upload limit is a puny 2MB. Let’s change it to 64MB.</p>
 <p>To enter the running container, type:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker <span class="built_in">exec</span> -i -t mywordpress_wordpress_1 bash</div></pre></td></tr></table></figure>
 <p>To install the nano text editor, type:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apt-get update</div><div class="line">apt-get install nano</div></pre></td></tr></table></figure></p>
@@ -83,13 +173,13 @@
 <p>And restart them in detatched mode</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up <span class="_">-d</span></div></pre></td></tr></table></figure>
 <p>Hooray, our upload limit is now increased! We can now upload media up to 64MB.</p>
-<p>You can visit the site I generated this way at <a href="https://news.containerize.us">https://news.containerize.us</a></p>
-<p>Also, using keys a generate with HTTPS-PORTAL, I created a <a href="https://www.mattermost.org/">Mattermost</a> instance <a href="https://plz.containerize.us:4430">here</a>. </p>
-<h3 id="Click-here-to-join-the-Containers-group"><a href="#Click-here-to-join-the-Containers-group" class="headerlink" title="Click here to join the Containers group."></a><a href="https://plz.containerize.us:4430/signup_user_complete/?id=xdea87cuw7ripqc6ib5995ep9y">Click here to join the Containers group.</a></h3>]]></content>
+<h5 id="My-Running-Sites"><a href="#My-Running-Sites" class="headerlink" title="My Running Sites"></a>My Running Sites</h5><p>You can visit the site I generated this way at <a href="https://news.containerize.us">https://news.containerize.us</a></p>
+<p>Also, using keys a generate with HTTPS-PORTAL, I created a <a href="https://www.mattermost.org/">Mattermost</a> instance.</p>
+<h3 id="Click-here-to-join-my-Containers-Mattermost-group"><a href="#Click-here-to-join-my-Containers-Mattermost-group" class="headerlink" title="Click here to join my Containers Mattermost group."></a><a href="https://plz.containerize.us:4430/signup_user_complete/?id=xdea87cuw7ripqc6ib5995ep9y">Click here to join my Containers Mattermost group.</a></h3>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker 
+      &lt;h5 id=&quot;Intro&quot;&gt;&lt;a href=&quot;#Intro&quot; class=&quot;headerlink&quot; title=&quot;Intro&quot;&gt;&lt;/a&gt;Intro&lt;/h5&gt;&lt;p&gt;I had a specific problem that i wanted to solve: setting u
     
     </summary>
     
@@ -111,7 +201,7 @@
     <link href="https://jacksonjs.github.io/2016/07/24/twitterBot/"/>
     <id>https://jacksonjs.github.io/2016/07/24/twitterBot/</id>
     <published>2016-07-25T03:33:59.000Z</published>
-    <updated>2016-07-31T01:30:43.951Z</updated>
+    <updated>2016-08-01T12:32:39.635Z</updated>
     
     <content type="html"><![CDATA[<p> I am a huge fan of the television program <a href="http://abc.go.com/shows/shark-tank">Shark Tank</a>. To have more fun watching it, I decided to make a twitter bot that would retweet anything that included the searchable hashtag <a href="https://twitter.com/search?q=%23SharkTank&amp;src=tyah">#SharkTank</a>. </p>
 <p>This wasn’t a very hard of a project, there are already many tutorials and boiler plates for getting a bot up and running on Node.js with the Twitter API. You can find the source code to my bot <a href="https://github.com/JacksonJS/sharkTankBot">here</a>.</p>
@@ -141,6 +231,8 @@
     
     </summary>
     
+    
+      <category term="Javascript" scheme="https://jacksonjs.github.io/tags/javascript/"/>
     
       <category term="Node" scheme="https://jacksonjs.github.io/tags/node/"/>
     

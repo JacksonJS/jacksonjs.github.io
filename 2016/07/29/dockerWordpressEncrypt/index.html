@@ -16,8 +16,8 @@
   
   
   
-    <meta name="description" content="I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Seemed challenging.
-Luckily for me, the project H...">
+    <meta name="description" content="IntroI had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Seemed challenging.
+Luckily for me, the proj...">
   
   <title>Let's Encrypt, Docker, and WordPress [ JacksonJS ]</title>
   
@@ -127,7 +127,7 @@ Luckily for me, the project H...">
     <p class="page-title-sub">
       <span id = "post-title-date">Created at 2016-07-29</span>
       
-        <span id = "post-title-updated">Updated at 2016-08-01</span>
+        <span id = "post-title-updated">Updated at 2016-08-03</span>
       
       
       
@@ -167,7 +167,7 @@ Luckily for me, the project H...">
       
     </p>
     
-    <p>I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Seemed challenging.</p>
+    <h5 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h5><p>I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Seemed challenging.</p>
 <p>Luckily for me, the project <a href="https://github.com/steveltn/https-portal">HTTPS-PORTAL</a> is is working order and being actively developed! </p>
 <p>Using <a href="https://letsencrypt.org/">Let’s Encrypt’s</a> certificate automation, I was able to set up an HTTPS wordpress install in under five minutes. Here are some reasons why sites should be using HTTPS:</p>
 <ul>
@@ -179,12 +179,12 @@ Luckily for me, the project H...">
 </li>
 </ul>
 <p>I followed <a href="http://steveltn.me/2015/12/18/nginx-acme/">this tutorial </a> to get me up and running with my wordpress install. I had some problems understanding how to write a docker-compose file, but the blog author was very quick in helping to correct my mistakes. </p>
-<p>Here is what my docker-compose.yml file contained, minus the real password:</p>
+<h5 id="Compose"><a href="#Compose" class="headerlink" title="Compose"></a>Compose</h5><p>Here is what my docker-compose.yml file contained, minus the real password:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># docker-compose.yml for my_wordpress site</span></div><div class="line"></div><div class="line">https-portal:</div><div class="line">  image: steveltn/https-portal</div><div class="line">  ports:</div><div class="line">    - 80:80</div><div class="line">    - 443:443</div><div class="line">  links:</div><div class="line">    - wordpress</div><div class="line">  environment:</div><div class="line">    - <span class="string">"DOMAINS=containerize.us -&gt; http://wordpress"</span> <span class="comment">#maps https-portal to the wordpress image</span></div><div class="line">    - <span class="string">"PRODUCTION=true"</span> <span class="comment">#ensures that the certificate will be recognized as valid by web browsers</span></div><div class="line"></div><div class="line">wordpress:</div><div class="line">  image: wordpress</div><div class="line">  links:</div><div class="line">    - db:mysql</div><div class="line"></div><div class="line">db:</div><div class="line">  image: mariadb</div><div class="line">  ports:</div><div class="line">    - 3306:3306</div><div class="line">  environment:</div><div class="line">    MYSQL_ROOT_PASSWORD: <span class="string">'&lt;secure_password&gt;'</span></div></pre></td></tr></table></figure>
 <p>In the docker-compose.yml directory, run the command to start the containers:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up</div></pre></td></tr></table></figure>
 <p>After the server generates a TLS Diffie-Hellman key and spins up the WordPress instance, we have our WordPress site installed! </p>
-<p>Now let’s insert some media. While you could just embed everything from an external site like youtube and imagur, it is nice to have the option to host your own assets.  Right now, the upload limit is a puny 2MB. Let’s change it to 64MB.</p>
+<h5 id="Increase-Upload-Allowance"><a href="#Increase-Upload-Allowance" class="headerlink" title="Increase Upload Allowance"></a>Increase Upload Allowance</h5><p>Now let’s insert some media. While you could just embed everything from an external site like youtube and imagur, it is nice to have the option to host your own assets.  Right now, the upload limit is a puny 2MB. Let’s change it to 64MB.</p>
 <p>To enter the running container, type:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker <span class="built_in">exec</span> -i -t mywordpress_wordpress_1 bash</div></pre></td></tr></table></figure>
 <p>To install the nano text editor, type:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apt-get update</div><div class="line">apt-get install nano</div></pre></td></tr></table></figure></p>
@@ -194,16 +194,16 @@ Luckily for me, the project H...">
 <p>And restart them in detatched mode</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up <span class="_">-d</span></div></pre></td></tr></table></figure>
 <p>Hooray, our upload limit is now increased! We can now upload media up to 64MB.</p>
-<p>You can visit the site I generated this way at <a href="https://news.containerize.us">https://news.containerize.us</a></p>
-<p>Also, using keys a generate with HTTPS-PORTAL, I created a <a href="https://www.mattermost.org/">Mattermost</a> instance <a href="https://plz.containerize.us:4430">here</a>. </p>
-<h3 id="Click-here-to-join-the-Containers-group"><a href="#Click-here-to-join-the-Containers-group" class="headerlink" title="Click here to join the Containers group."></a><a href="https://plz.containerize.us:4430/signup_user_complete/?id=xdea87cuw7ripqc6ib5995ep9y">Click here to join the Containers group.</a></h3>
+<h5 id="My-Running-Sites"><a href="#My-Running-Sites" class="headerlink" title="My Running Sites"></a>My Running Sites</h5><p>You can visit the site I generated this way at <a href="https://news.containerize.us">https://news.containerize.us</a></p>
+<p>Also, using keys a generate with HTTPS-PORTAL, I created a <a href="https://www.mattermost.org/">Mattermost</a> instance.</p>
+<h3 id="Click-here-to-join-my-Containers-Mattermost-group"><a href="#Click-here-to-join-my-Containers-Mattermost-group" class="headerlink" title="Click here to join my Containers Mattermost group."></a><a href="https://plz.containerize.us:4430/signup_user_complete/?id=xdea87cuw7ripqc6ib5995ep9y">Click here to join my Containers Mattermost group.</a></h3>
   </article>
   <div class="random-toc-area">
   <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">Show TOC</button>
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Click-here-to-join-the-Containers-group"><span class="toc-text">Click here to join the Containers group.</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Intro"><span class="toc-text">Intro</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Compose"><span class="toc-text">Compose</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Increase-Upload-Allowance"><span class="toc-text">Increase Upload Allowance</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#My-Running-Sites"><span class="toc-text">My Running Sites</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Click-here-to-join-my-Containers-Mattermost-group"><span class="toc-text">Click here to join my Containers Mattermost group.</span></a>
   </div>
 </div>
 
