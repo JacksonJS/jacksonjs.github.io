@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>JacksonJS</title>
+  <subtitle>Linux, DevOps, and Programming Blog of Jackson Stokes</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://jacksonjs.github.io/"/>
+  <updated>2016-08-07T03:08:19.226Z</updated>
+  <id>https://jacksonjs.github.io/</id>
+  
+  <author>
+    <name>JacksonJS</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>DynDNS</title>
+    <link href="https://jacksonjs.github.io/2016/08/03/dyndns/"/>
+    <id>https://jacksonjs.github.io/2016/08/03/dyndns/</id>
+    <published>2016-08-04T05:27:12.000Z</published>
+    <updated>2016-08-07T03:08:19.226Z</updated>
+    
+    <content type="html"><![CDATA[<p>Serving internet content from your home address can be difficult. Your ISP may change your IP address at any given moment, making it difficult to find your server on the internet. Dynamic DNS is a way to always be able to find your home server using conistent domain name. This guide will walkyu through setting p dynamic DNS with the privider www.noip.com. </p>
+<h5 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1"></a>Step 1</h5><p>First we have to get us a free subdomain with DynDNS. Therefore we register us for free at No-IP.com. We are going to be using the free option. </p>
+<h5 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a>Step 2</h5><p>Now we install the  No-IP.com the Dynamic DNS Update client for Linux on our Raspberry Pi and unpack it. He will later check every few minutes to see if the IP address has changed, if so, notify the application this No-IP.com with, so your subdomain refers again to the current IP address of Raspberry Pis.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget http://www.noip.com/client/linux/noip-duc-linux.tar.gz</div><div class="line">tar xf noip-duc-linux.tar.gz</div><div class="line">rm noip-duc-linux.tar.gz</div></pre></td></tr></table></figure>
+<h5 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a>Step 3</h5><p>Rename directory and enter:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mv noip-* noip</div><div class="line"><span class="built_in">cd</span> noip</div></pre></td></tr></table></figure>
+<h5 id="Step-4"><a href="#Step-4" class="headerlink" title="Step 4"></a>Step 4</h5><p>Now we install the application. At the end of this call we are asked for our e-mail address of the No-IP.com account, our password, and the subdomain and the update interval. Here we enter our data.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo make install</div></pre></td></tr></table></figure></p>
+<h5 id="Step-5"><a href="#Step-5" class="headerlink" title="Step 5"></a>Step 5</h5><p>Now we have to start the installed application using the following command.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo noip2</div></pre></td></tr></table></figure></p>
+<h5 id="Step-6"><a href="#Step-6" class="headerlink" title="Step 6"></a>Step 6</h5><p>If you want that the update will start automatically with the client Raspberry Pi and thus always updates the IP, you can to create a crontab.<br><code>crontab -e</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@reboot <span class="built_in">cd</span> /home/pi/noip &amp;&amp; sudo noip2</div></pre></td></tr></table></figure>
+<p>Now forward the ports on whatever web services you will be using with your custom domain </p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Serving internet content from your home address can be difficult. Your ISP may change your IP address at any given moment, making it diff
+    
+    </summary>
+    
+    
+      <category term="Dynamic DNS" scheme="https://jacksonjs.github.io/tags/dynamic-dns/"/>
+    
+      <category term="Hosting" scheme="https://jacksonjs.github.io/tags/hosting/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Install Prosody XMPP Server on your Raspberry Pi</title>
+    <link href="https://jacksonjs.github.io/2016/08/03/prosodyonpi/"/>
+    <id>https://jacksonjs.github.io/2016/08/03/prosodyonpi/</id>
+    <published>2016-08-04T04:58:08.000Z</published>
+    <updated>2016-08-07T04:49:39.099Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>Extensible Messaging and Presence Protocol (XMPP) is a set of free and open technologies for instant messaging, multi-party chat, voice and video chat, and more. It is a federated system, meaning that a user from one XMPP server can messaging someone with a different account on another server. This guide will show you how to setup your own XMPP chat service on Ubuntu or Debian using the <a href="https://prosody.im/">Prosody</a> XMPP server. </p>
+<p>Use <a href="./../dyndns/index.html">this guide</a> to configure dynamic DNS on your raspberry pi if you would like to connect to a named domain. This is most likely essential if you are hosting your pi from your home.</p>
+<h1 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h1><p>Prosody should already be in your distribution’s the repositories.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install prosody</div></pre></td></tr></table></figure></p>
+<p>Generate you self-signed certs and keys:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo su</div><div class="line"><span class="built_in">cd</span> /etc/prosody/certs/</div><div class="line">sudo openssl genrsa -out prosody.key 4096</div><div class="line">sudo openssl req -new -sha256 -key prosody.key -out prosody.csr</div><div class="line">sudo openssl x509 -req -sha256 -days 3650 -in prosody.csr -signkey prosody.key -out prosody.crt</div><div class="line"><span class="built_in">exit</span></div></pre></td></tr></table></figure>
+<p>Next we plug in our SSH stuff to encrypt communicatinos on our server. We change this:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">VirtualHost <span class="string">"example.com"</span></div><div class="line">        enabled = <span class="literal">false</span> -- Remove this line to <span class="built_in">enable</span> this host</div><div class="line"> </div><div class="line">        -- Assign this host a certificate <span class="keyword">for</span> TLS, otherwise it would use the one</div><div class="line">        -- <span class="built_in">set</span> <span class="keyword">in</span> the global section (<span class="keyword">if</span> any).</div><div class="line">        -- Note that old-style SSL on port 5223 only supports one certificate, and will always</div><div class="line">        -- use the global one.</div><div class="line">        ssl = &#123;</div><div class="line">                key = <span class="string">"/etc/prosody/certs/example.com.key"</span>;</div><div class="line">                certificate = <span class="string">"/etc/prosody/certs/example.com.crt"</span>;</div><div class="line">        &#125;</div></pre></td></tr></table></figure></p>
+<p>Into this:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">VirtualHost <span class="string">"myIncredibleSiteName.no-ip.org"</span></div><div class="line">        ssl = &#123;</div><div class="line">                key = <span class="string">"/etc/prosody/certs/prosody.key"</span>;</div><div class="line">                certificate = <span class="string">"/etc/prosody/certs/prosody.crt"</span>;</div><div class="line">        &#125;</div></pre></td></tr></table></figure></p>
+<p>Enable multi-user chat, if desired:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Component &quot;conference.example.no-ip.net&quot; &quot;muc&quot;</div></pre></td></tr></table></figure></p>
+<p>Restart to make settings take effect:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo /etc/init.d/prosody restart</div></pre></td></tr></table></figure>
+<p>Next, we configure our first user. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">prosodyctl adduser admin@example.ddns.net</div></pre></td></tr></table></figure>
+<p>Give the desired password at prompt.</p>
+<p>Now foreward ports <code>5222</code> and <code>5269</code> on your router (Go ahead and foreward <code>5280</code> and <code>5281</code> as well if you want to upload and store files on your server).</p>
+<p>To view information about your Prosody install, enter:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">prosodyctl about</div></pre></td></tr></table></figure>
+<h1 id="Conversations"><a href="#Conversations" class="headerlink" title="Conversations"></a>Conversations</h1><p>An excellent free and open source XMPP client for Android is <a href="https://conversations.im/">Conversations</a> (also available at no cost on <a href="https://f-droid.org/repository/browse/?fdfilter=conversations&amp;fdid=eu.siacs.conversations">F-Droid</a></p>
+<p>After installing the app, insert your user credentials. </p>
+<p>Depending an the XMPP server that you create an account on, different functionality will be available to you. <a href="">Here is a list of different servers and the XMPP extensions that they support</a></p>
+<hr>
+<p>Right now we can add contacts and message with them. We can send any type of file, and it is routed and stored on the destination’s phone.</p>
+<p>But what about group messaging? What about syncing message on different devices?</p>
+<hr>
+<p>Go to Manage Accounts, select yours.</p>
+<p>In upper right, check the Server info box.</p>
+<p>We have a lot of cool stuff missing, it’s time we tried enabling it!</p>
+<h1 id="Modules"><a href="#Modules" class="headerlink" title="Modules"></a>Modules</h1><p><a href="https://gultsch.de/compliance.html">Here</a> is a great list of public XMPP servers and the extensions that they support. </p>
+<p>On our server, let’s enable all of the modules that the Conversations app supports. </p>
+<p>First, install mercurial:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install mercurial</div></pre></td></tr></table></figure>
+<p>Go into <code>/usr/lib/prosody</code><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hg <span class="built_in">clone</span> https://hg.prosody.im/prosody-modules/ prosody-modules</div></pre></td></tr></table></figure></p>
+<p>In <code>/etc/prosody/prosody.lua.config</code>, add below the admin line <code>plugin_paths = { &quot;/usr/lib/prosody/prosody-modules&quot; }</code></p>
+<p>This is what my modules_enabled portion looks like now:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line">modules_enabled = &#123;</div><div class="line"></div><div class="line">  -- Generally required</div><div class="line">    <span class="string">"roster"</span>; -- Allow users to have a roster. Recommended ;)</div><div class="line">    <span class="string">"saslauth"</span>; -- Authentication <span class="keyword">for</span> clients and servers. Recommended <span class="keyword">if</span> you want to <span class="built_in">log</span> in.</div><div class="line">    <span class="string">"tls"</span>; -- Add support <span class="keyword">for</span> secure TLS on c2s/s2s connections</div><div class="line">    <span class="string">"dialback"</span>; -- s2s dialback support</div><div class="line">    <span class="string">"disco"</span>; -- Service discovery</div><div class="line"></div><div class="line">  -- Not essential, but recommended</div><div class="line">    <span class="string">"private"</span>; -- Private XML storage (<span class="keyword">for</span> room bookmarks, etc.)</div><div class="line">    <span class="string">"vcard"</span>; -- Allow users to <span class="built_in">set</span> vCards</div><div class="line">  </div><div class="line">  -- These are commented by default as they have a performance impact</div><div class="line">    --<span class="string">"privacy"</span>; -- Support privacy lists</div><div class="line">    --<span class="string">"compression"</span>; -- Stream compression (Debian: requires lua-zlib module to work)</div><div class="line"></div><div class="line">  -- Nice to have</div><div class="line">    <span class="string">"version"</span>; -- Replies to server version requests</div><div class="line">    <span class="string">"uptime"</span>; -- Report how long server has been running</div><div class="line">    <span class="string">"time"</span>; -- Let others know the time here on this server</div><div class="line">    <span class="string">"ping"</span>; -- Replies to XMPP pings with pongs</div><div class="line">    <span class="string">"pep"</span>; -- Enables users to publish their mood, activity, playing music and more</div><div class="line">    <span class="string">"register"</span>; -- Allow users to register on this server using a client and change passwords</div><div class="line"></div><div class="line">  -- Admin interfaces</div><div class="line">    <span class="string">"admin_adhoc"</span>; -- Allows administration via an XMPP client that supports ad-hoc commands</div><div class="line">    --<span class="string">"admin_telnet"</span>; -- Opens telnet console interface on localhost port 5582</div><div class="line">  </div><div class="line">  -- HTTP modules</div><div class="line">    <span class="string">"bosh"</span>; -- Enable BOSH clients, aka <span class="string">"Jabber over HTTP"</span></div><div class="line">    <span class="string">"http_files"</span>; -- Serve static files from a directory over HTTP</div><div class="line"></div><div class="line">  -- Other specific functionality</div><div class="line">    <span class="string">"posix"</span>; -- POSIX functionality, sends server to background, enables syslog, etc.</div><div class="line">    --<span class="string">"groups"</span>; -- Shared roster support</div><div class="line">    --<span class="string">"announce"</span>; -- Send announcement to all online users</div><div class="line">    --<span class="string">"welcome"</span>; -- Welcome users who register accounts</div><div class="line">    --<span class="string">"watchregistrations"</span>; -- Alert admins of registrations</div><div class="line">    --<span class="string">"motd"</span>; -- Send a message to users when they <span class="built_in">log</span> <span class="keyword">in</span></div><div class="line">    --<span class="string">"legacyauth"</span>; -- Legacy authentication. Only used by some old clients and bots.</div><div class="line">    --</div><div class="line">    --external modules--</div><div class="line">    <span class="string">"carbons"</span>;</div><div class="line">    <span class="string">"mam"</span>;</div><div class="line">    <span class="string">"mam_archive"</span>;</div><div class="line">    <span class="string">"smacks"</span>;</div><div class="line">    <span class="string">"http"</span>;</div><div class="line">    <span class="string">"http_upload"</span>;</div><div class="line">    <span class="string">"http_muc_log"</span>;</div><div class="line">    <span class="string">"csi"</span>;</div><div class="line">    <span class="string">"privacy"</span>;</div><div class="line">    <span class="string">"blocking"</span>;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">--HTTP STUFF-----</div><div class="line">http_ports = &#123; 5280 &#125;</div><div class="line">http_interfaces = &#123; <span class="string">"*"</span> &#125;</div><div class="line"> </div><div class="line">https_ports = &#123; 5281 &#125;</div><div class="line">https_interfaces = &#123; <span class="string">"*"</span> &#125;</div><div class="line">http_upload_file_size_<span class="built_in">limit</span> = 1024 * 1024 * 20 --20MB</div><div class="line"></div><div class="line"> https_ssl = &#123;</div><div class="line">    certificate = <span class="string">"/etc/prosody/certs/prosody.crt"</span>;</div><div class="line">    key = <span class="string">"/etc/prosody/certs/prosody.key"</span>;</div><div class="line">    &#125;</div><div class="line">--END HTTP STUFF------</div></pre></td></tr></table></figure>
+<p>Restart Prosody to enable changes:</p>
+<p><code>sudo /etc/init.d/prosody restart</code></p>
+<p>All my modules are enabled!</p>
+<p><img src="./../prosodyonpi/workingConversations.png" alt="allModulesWorking"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Overview&quot;&gt;&lt;a href=&quot;#Overview&quot; class=&quot;headerlink&quot; title=&quot;Overview&quot;&gt;&lt;/a&gt;Overview&lt;/h1&gt;&lt;p&gt;Extensible Messaging and Presence Protocol (XM
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://jacksonjs.github.io/tags/linux/"/>
+    
+      <category term="XMPP" scheme="https://jacksonjs.github.io/tags/xmpp/"/>
+    
+      <category term="Prosody" scheme="https://jacksonjs.github.io/tags/prosody/"/>
+    
+      <category term="Raspberry Pi" scheme="https://jacksonjs.github.io/tags/raspberry-pi/"/>
+    
+      <category term="Conversations" scheme="https://jacksonjs.github.io/tags/conversations/"/>
+    
+      <category term="Jabber" scheme="https://jacksonjs.github.io/tags/jabber/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mounting Google Drive on the Linux Desktop</title>
+    <link href="https://jacksonjs.github.io/2016/08/01/google-drive-ocamlfuse/"/>
+    <id>https://jacksonjs.github.io/2016/08/01/google-drive-ocamlfuse/</id>
+    <published>2016-08-01T07:31:31.000Z</published>
+    <updated>2016-08-01T07:35:28.249Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Mount-Google-Drive-on-your-Linux-Desktop"><a href="#Mount-Google-Drive-on-your-Linux-Desktop" class="headerlink" title="Mount Google Drive on your Linux Desktop"></a>Mount Google Drive on your Linux Desktop</h1><p>I had to share this little gem of a program. Many people have a google drive account, but in linux there was no convienent way to access your files from the Desktop. This program allows you to mount your drive files on your desktop, eliminating the need to sync and waste valuable hard drive space. The souce can be obtained <a href="https://github.com/astrada/google-drive-ocamlfuse">here</a>. </p>
+<h3 id="Download"><a href="#Download" class="headerlink" title="Download:"></a>Download:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:alessandro-strada/ppa</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install google-drive-ocamlfuse</div></pre></td></tr></table></figure>
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage:"></a>Usage:</h3><p>The first time, you can run google-drive-ocamlfuse without parameters:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">google-drive-ocamlfuse</div></pre></td></tr></table></figure>
+<p>This command will create the default application directory (~/.gdfuse/default), containing the configuration file config (see the wiki page for more details about configuration). And it will start a web browser to obtain authorization to access your Google Drive. This will let you modify default configuration before mounting the filesystem.</p>
+<p>Then you can mount the filesystem:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">google-drive-ocamlfuse mountpoint</div></pre></td></tr></table></figure>
+<p>If you have more than one account, you can run:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">google-drive-ocamlfuse -label label [mountpoint]</div></pre></td></tr></table></figure>
+<p>Using label to distinguish different accounts. The program will use the directory ~/.gdfuse/label to host configuration, application state, and file cache. No file is shared among different accounts, so you can have a different configuration for each one.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Mount-Google-Drive-on-your-Linux-Desktop&quot;&gt;&lt;a href=&quot;#Mount-Google-Drive-on-your-Linux-Desktop&quot; class=&quot;headerlink&quot; title=&quot;Mount Google
+    
+    </summary>
+    
+    
+      <category term="Google-Drive" scheme="https://jacksonjs.github.io/tags/google-drive/"/>
+    
+      <category term="Linux" scheme="https://jacksonjs.github.io/tags/linux/"/>
+    
+      <category term="Desktop" scheme="https://jacksonjs.github.io/tags/desktop/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Let&#39;s Encrypt, Docker, and WordPress</title>
+    <link href="https://jacksonjs.github.io/2016/07/29/dockerWordpressEncrypt/"/>
+    <id>https://jacksonjs.github.io/2016/07/29/dockerWordpressEncrypt/</id>
+    <published>2016-07-30T06:00:25.000Z</published>
+    <updated>2016-08-04T06:13:07.537Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h5><p>I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Seemed challenging.</p>
+<p>Luckily for me, the project <a href="https://github.com/steveltn/https-portal">HTTPS-PORTAL</a> is is working order and being actively developed! </p>
+<p>Using <a href="https://letsencrypt.org/">Let’s Encrypt’s</a> certificate automation, I was able to set up an HTTPS wordpress install in under five minutes. Here are some reasons why sites should be using HTTPS:</p>
+<ul>
+<li><p>HTTPS helps prevent intruders from tampering with the communications between your websites and your users’ browsers. Intruders include intentionally malicious attackers, and legitimate but intrusive companies, such as ISPs or hotels that inject ads into pages.</p>
+</li>
+<li><p>HTTPS prevents intruders from being able to passively listen in on the communications between your websites and your users.</p>
+</li>
+<li><p>It is much cheaper and faster to imlement because of the Let’s Encrypt project!</p>
+</li>
+</ul>
+<p>I followed <a href="http://steveltn.me/2015/12/18/nginx-acme/">this tutorial </a> to get me up and running with my wordpress install. I had some problems understanding how to write a docker-compose file, but the blog author was very quick in helping to correct my mistakes. </p>
+<h5 id="Compose"><a href="#Compose" class="headerlink" title="Compose"></a>Compose</h5><p>Here is what my docker-compose.yml file contained, minus the real password:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># docker-compose.yml for my_wordpress site</span></div><div class="line"></div><div class="line">https-portal:</div><div class="line">  image: steveltn/https-portal</div><div class="line">  ports:</div><div class="line">    - 80:80</div><div class="line">    - 443:443</div><div class="line">  links:</div><div class="line">    - wordpress</div><div class="line">  environment:</div><div class="line">    - <span class="string">"DOMAINS=containerize.us -&gt; http://wordpress"</span> <span class="comment">#maps https-portal to the wordpress image</span></div><div class="line">    - <span class="string">"PRODUCTION=true"</span> <span class="comment">#ensures that the certificate will be recognized as valid by web browsers</span></div><div class="line"></div><div class="line">wordpress:</div><div class="line">  image: wordpress</div><div class="line">  links:</div><div class="line">    - db:mysql</div><div class="line"></div><div class="line">db:</div><div class="line">  image: mariadb</div><div class="line">  ports:</div><div class="line">    - 3306:3306</div><div class="line">  environment:</div><div class="line">    MYSQL_ROOT_PASSWORD: <span class="string">'&lt;secure_password&gt;'</span></div></pre></td></tr></table></figure>
+<p>In the docker-compose.yml directory, run the command to start the containers:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up</div></pre></td></tr></table></figure>
+<p>After the server generates a TLS Diffie-Hellman key and spins up the WordPress instance, we have our WordPress site installed! </p>
+<h5 id="Increase-Upload-Allowance"><a href="#Increase-Upload-Allowance" class="headerlink" title="Increase Upload Allowance"></a>Increase Upload Allowance</h5><p>Now let’s insert some media. While you could just embed everything from an external site like youtube and imagur, it is nice to have the option to host your own assets.  Right now, the upload limit is a puny 2MB. Let’s change it to 64MB.</p>
+<p>To enter the running container, type:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker <span class="built_in">exec</span> -i -t mywordpress_wordpress_1 bash</div></pre></td></tr></table></figure>
+<p>To install the nano text editor, type:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apt-get update</div><div class="line">apt-get install nano</div></pre></td></tr></table></figure></p>
+<p>Create the file php.ini in you WordPress root directory.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi php.ini</div></pre></td></tr></table></figure></p>
+<p>Once in, paste these lines:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">upload_max_filesize = 64M</div><div class="line">post_max_size = 64M</div><div class="line">memory_<span class="built_in">limit</span> = 64M</div></pre></td></tr></table></figure></p>
+<p>Stop the running containers…<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose stop</div></pre></td></tr></table></figure></p>
+<p>And restart them in detatched mode</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up <span class="_">-d</span></div></pre></td></tr></table></figure>
+<p>Hooray, our upload limit is now increased! We can now upload media up to 64MB.</p>
+<h5 id="My-Running-Sites"><a href="#My-Running-Sites" class="headerlink" title="My Running Sites"></a>My Running Sites</h5><p>You can visit the site I generated this way at <a href="https://news.containerize.us">https://news.containerize.us</a></p>
+<p>Also, using keys a generate with HTTPS-PORTAL, I created a <a href="https://www.mattermost.org/">Mattermost</a> instance.</p>
+<h3 id="Click-here-to-join-my-Containers-Mattermost-group"><a href="#Click-here-to-join-my-Containers-Mattermost-group" class="headerlink" title="Click here to join my Containers Mattermost group."></a><a href="https://plz.containerize.us:4430/signup_user_complete/?id=xdea87cuw7ripqc6ib5995ep9y">Click here to join my Containers Mattermost group.</a></h3>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h5 id=&quot;Intro&quot;&gt;&lt;a href=&quot;#Intro&quot; class=&quot;headerlink&quot; title=&quot;Intro&quot;&gt;&lt;/a&gt;Intro&lt;/h5&gt;&lt;p&gt;I had a specific problem that i wanted to solve: setting u
+    
+    </summary>
+    
+    
+      <category term="Docker" scheme="https://jacksonjs.github.io/tags/docker/"/>
+    
+      <category term="Let&#39;s Encrypt" scheme="https://jacksonjs.github.io/tags/let-s-encrypt/"/>
+    
+      <category term="Wordpress" scheme="https://jacksonjs.github.io/tags/wordpress/"/>
+    
+      <category term="Mattermost" scheme="https://jacksonjs.github.io/tags/mattermost/"/>
+    
+      <category term="NGINX" scheme="https://jacksonjs.github.io/tags/nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Creating a Twitter Bot with Node.js</title>
+    <link href="https://jacksonjs.github.io/2016/07/24/twitterBot/"/>
+    <id>https://jacksonjs.github.io/2016/07/24/twitterBot/</id>
+    <published>2016-07-25T03:33:59.000Z</published>
+    <updated>2016-08-01T12:32:39.635Z</updated>
+    
+    <content type="html"><![CDATA[<p> I am a huge fan of the television program <a href="http://abc.go.com/shows/shark-tank">Shark Tank</a>. To have more fun watching it, I decided to make a twitter bot that would retweet anything that included the searchable hashtag <a href="https://twitter.com/search?q=%23SharkTank&amp;src=tyah">#SharkTank</a>. </p>
+<p>This wasn’t a very hard of a project, there are already many tutorials and boiler plates for getting a bot up and running on Node.js with the Twitter API. You can find the source code to my bot <a href="https://github.com/JacksonJS/sharkTankBot">here</a>.</p>
+<p>Clone the git repo <code>git clone https://github.com/JacksonJS/sharkTankBot.git</code> and setup your Twitter account for <a href="https://apps.twitter.com/">apps</a>, and plugin your credentials into config.js</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  consumer_key: 'use',</div><div class="line">  consumer_secret: 'your',</div><div class="line">  access_token: 'own',</div><div class="line">  access_token_secret: 'tokens&amp;keys'</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Run <code>npm install</code> in your root folder, allow the dependencies to be downloaded, and then run:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node bot.js</div></pre></td></tr></table></figure></p>
+<p><a class="twitter-timeline" href="https://twitter.com/SharkTankBot" data-widget-id="733562729961639936">Tweets by @SharkTankBot</a></p>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+<p>Super easy!</p>
+<hr>
+<h5 id="There-are-several-guides-to-help-you-start-making-a-bot-and-I-used-https-github-com-nisrulz-twitterbot-nodejs-as-a-starting-point-for-SharkTankBot"><a href="#There-are-several-guides-to-help-you-start-making-a-bot-and-I-used-https-github-com-nisrulz-twitterbot-nodejs-as-a-starting-point-for-SharkTankBot" class="headerlink" title="There are several guides to help you start making a bot, and I used https://github.com/nisrulz/twitterbot-nodejs  as a starting point for @SharkTankBot."></a>There are several guides to help you start making a bot, and I used <a href="https://nisrulz.github.io/twitterbot-nodejs/">https://github.com/nisrulz/twitterbot-nodejs</a>  as a starting point for <a href="https://twitter.com/SharkTankBot">@SharkTankBot</a>.</h5><hr>
+<h5 id="Info-for-using-the-Twitter-API-Client-for-node-is-located-here"><a href="#Info-for-using-the-Twitter-API-Client-for-node-is-located-here" class="headerlink" title="Info for using the Twitter API Client for node is located here"></a>Info for using the Twitter API Client for node is located <a href="https://github.com/ttezel/twit">here</a></h5><hr>
+<p>Edit: I am now using the forever package for node to keep this bot from crashing. To use, run <code>npm install -g forever</code>. </p>
+<p>To start the bot, while in the bot root directory, run <code>forever start --spinSleepTime 10000 bot.js</code>.</p>
+<p>Instead of writing to the console, our logs will go somewhere in <code>~/.forever</code>. To locate the log for your currently running node project, run <code>forever list</code>. </p>
+<p>If you would like to see the live updates of logs, run <code>tail -f &lt;logfile&gt;</code>.</p>
+<hr>
+<p>I will update this post as I add new features to the bot. Have fun, and stay safe!</p>
+<h1 style="text-align: center; font-size: 5em">😎</h1>
+
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; I am a huge fan of the television program &lt;a href=&quot;http://abc.go.com/shows/shark-tank&quot;&gt;Shark Tank&lt;/a&gt;. To have more fun watching it, I d
+    
+    </summary>
+    
+    
+      <category term="Javascript" scheme="https://jacksonjs.github.io/tags/javascript/"/>
+    
+      <category term="Node" scheme="https://jacksonjs.github.io/tags/node/"/>
+    
+      <category term="Twitter" scheme="https://jacksonjs.github.io/tags/twitter/"/>
+    
+      <category term="API" scheme="https://jacksonjs.github.io/tags/api/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Quassel IRC</title>
+    <link href="https://jacksonjs.github.io/2016/07/19/quassel/"/>
+    <id>https://jacksonjs.github.io/2016/07/19/quassel/</id>
+    <published>2016-07-20T00:32:01.000Z</published>
+    <updated>2016-07-31T01:31:31.587Z</updated>
+    
+    <content type="html"><![CDATA[<p>Quassel IRC is a modern, cross platform, distrubuted IRC client. It requires users to set up both the server (QuasselreCore) and a client. The client attaches to the core, which saves all the IRC info. You can create new users that have seperate profiles and channels from each other, allowing multiple people to use the same core without messing up each others settings.</p>
+<p>I will assume you have an ubuntu 14.04 Digital Ocean droplet to install your Quasselcore. When we install, we will be using the SQlite database so that we can use the manaers.py script later to add and manage multiple users.</p>
+<p>SSH into your <strong>server</strong>.</p>
+<p>Add repository</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:mamarley/quassel</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install quassel-core</div></pre></td></tr></table></figure>
+<p>Check that Quasselcore is running (I’m using sudo to display the process name)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo netstat -tulpn</div></pre></td></tr></table></figure></p>
+<p>Output should be almost identical to:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcp6       0      0 :::4242                 :::*                    LISTEN      764/quasselcore</div></pre></td></tr></table></figure></p>
+<p>On <strong>client</strong> computer, add repo:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:mamarley/quassel</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install quasselclient</div></pre></td></tr></table></figure>
+<p>Connect your Quassel Client to your server and follow the setup wizard.</p>
+<p>Create Admin User:<br><img src="./../quassel/createAdmin.png" alt="setup_core"></p>
+<p>Use the default sqlite database:<br><img src="./../quassel/selectStorage.png" alt="selectStorage"></p>
+<p>Accept the self-signed certificate:<br><img src="./../quassel/accpet_untrusted_cert.png" alt="accept_untrusted_cert"></p>
+<p>Add core accounts:<br><img src="./../quassel/setup_core.png" alt="setup_core"></p>
+<p><img src="./../quassel/setup_core_account_edit.png" alt="setup_account"></p>
+<p>Setup your networks:<br><img src="./../quassel/setup_network.png" alt="setupNetwork"></p>
+<p>Now we will configure Quassel to add users. We cannot do this in the gui, we must do it as root in the core. </p>
+<p>First, logout of Quassel on your devices (just to play it safe so we don’t have to do an entire reinstallation).</p>
+<p>In your VPS, go to /var/lib/quassel/</p>
+<p>Copy the manageusers.py file from <a href="https://github.com/eugeii/quassel-manage-users">this GitHub repo</a></p>
+<p>Run the script.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./manageusers.py &lt;user&gt; &lt;password&gt;</div></pre></td></tr></table></figure></p>
+<p>Open up a new instance of Quasselclient, add the server and user information, and set it up just like before. </p>
+<p>Boom, you now have a persistent IRC connection!</p>
+<h1 id="NOTE"><a href="#NOTE" class="headerlink" title="NOTE:"></a>NOTE:</h1><p>If your SQlite database gets too big for your liking you can reduce its size using <a href="https://gist.github.com/ddrown/d7d2abbdf533b058a0c4">this</a> script or this <a href="https://gist.github.com/Taverius/1f7f2d61d8469dec2ce9">other script that includes making a backup</a>. </p>
+<p><a href="https://gist.github.com/Und3rf10w/36a2034cb2c8eafbfb801c1a89e1f8bc">Here</a> is a weekly purge.</p>
+<p><a href="https://gist.github.com/Furyhunter/7d5649eac69541ac783c">Another</a> method, this time running an sqlite command.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Quassel IRC is a modern, cross platform, distrubuted IRC client. It requires users to set up both the server (QuasselreCore) and a client
+    
+    </summary>
+    
+    
+      <category term="IRC" scheme="https://jacksonjs.github.io/tags/irc/"/>
+    
+      <category term="VPS" scheme="https://jacksonjs.github.io/tags/vps/"/>
+    
+      <category term="Quassel" scheme="https://jacksonjs.github.io/tags/quassel/"/>
+    
+      <category term="SQLite" scheme="https://jacksonjs.github.io/tags/sqlite/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Podcasts</title>
+    <link href="https://jacksonjs.github.io/2016/07/10/podcasts/"/>
+    <id>https://jacksonjs.github.io/2016/07/10/podcasts/</id>
+    <published>2016-07-11T05:57:30.000Z</published>
+    <updated>2016-07-26T01:46:22.200Z</updated>
+    
+    <content type="html"><![CDATA[<p>I listen to a few podcasts when I go running and sometimes when I am browsing the web. I find it a great way to stay informed about new developments in devops and web development. Listening to people much more experienced than myself helps me learn about methodologies, products, and planning strategies that I would not have heard of otherwise. Here are some of the technology  podcasts that i enjoy the most.</p>
+<h3 id="Complete-Developer-Podcast"><a href="#Complete-Developer-Podcast" class="headerlink" title="Complete Developer Podcast"></a>Complete Developer Podcast</h3><p>Complete Developer Podcast: <a href="http://completedeveloperpodcast.com/">http://completedeveloperpodcast.com/</a><br>New podcast, extremely helpful  and informative, very educational</p>
+<h3 id="Jupiter-Broadcasting"><a href="#Jupiter-Broadcasting" class="headerlink" title="Jupiter Broadcasting"></a>Jupiter Broadcasting</h3><p>Coder Radio: <a href="http://www.jupiterbroadcasting.com/show/coderradio/">http://www.jupiterbroadcasting.com/show/coderradio/</a><br>Linux Unplugged: <a href="http://www.jupiterbroadcasting.com/show/linuxun/">http://www.jupiterbroadcasting.com/show/linuxun/</a><br>Linux Action show: <a href="http://www.jupiterbroadcasting.com/show/linuxactionshow">http://www.jupiterbroadcasting.com/show/linuxactionshow</a><br>Linux focused tech podcasts: <a href="http://www.jupiterbroadcasting.com/">http://www.jupiterbroadcasting.com/</a></p>
+<h3 id="Software-Engineering-Daily"><a href="#Software-Engineering-Daily" class="headerlink" title="Software Engineering Daily"></a>Software Engineering Daily</h3><p>Software Engineering Daily: <a href="http://softwareengineeringdaily.com/">http://softwareengineeringdaily.com/</a></p>
+<h3 id="Devchat-tv"><a href="#Devchat-tv" class="headerlink" title="Devchat.tv"></a>Devchat.tv</h3><p>Javascript Jabber: <a href="https://devchat.tv/js-jabber">https://devchat.tv/js-jabber</a><br>Several great tech podcasts: <a href="https://devchat.tv/">https://devchat.tv/</a></p>
+<h3 id="Spec-fm"><a href="#Spec-fm" class="headerlink" title="Spec.fm"></a>Spec.fm</h3><p>Developer Tea: <a href="http://spec.fm/podcasts/developer-tea">http://spec.fm/podcasts/developer-tea</a><br>Does Not Compute: <a href="http://spec.fm/podcasts/does-not-compute">http://spec.fm/podcasts/does-not-compute</a><br>Several great development and design podcasts: <a href="http://spec.fm/">http://spec.fm/</a></p>
+<h3 id="Twit-tv"><a href="#Twit-tv" class="headerlink" title="Twit.tv"></a>Twit.tv</h3><p>Security Now!: <a href="https://www.grc.com/securitynow.htm">https://www.grc.com/securitynow.html</a></p>
+<h3 id="The-Changelog"><a href="#The-Changelog" class="headerlink" title="The Changelog"></a>The Changelog</h3><p>The Changelog: <a href="https://changelog.com/">https://changelog.com/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;I listen to a few podcasts when I go running and sometimes when I am browsing the web. I find it a great way to stay informed about new d
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="https://jacksonjs.github.io/tags/linux/"/>
+    
+      <category term="Podcasts" scheme="https://jacksonjs.github.io/tags/podcasts/"/>
+    
+      <category term="Development" scheme="https://jacksonjs.github.io/tags/development/"/>
+    
+      <category term="Javascript" scheme="https://jacksonjs.github.io/tags/javascript/"/>
+    
+  </entry>
+  
+</feed>
