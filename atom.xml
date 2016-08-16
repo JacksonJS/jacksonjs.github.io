@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://jacksonjs.github.io/"/>
-  <updated>2016-08-07T03:08:19.226Z</updated>
+  <updated>2016-08-08T12:44:11.948Z</updated>
   <id>https://jacksonjs.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://jacksonjs.github.io/2016/08/03/dyndns/"/>
     <id>https://jacksonjs.github.io/2016/08/03/dyndns/</id>
     <published>2016-08-04T05:27:12.000Z</published>
-    <updated>2016-08-07T03:08:19.226Z</updated>
+    <updated>2016-08-08T12:44:11.948Z</updated>
     
     <content type="html"><![CDATA[<p>Serving internet content from your home address can be difficult. Your ISP may change your IP address at any given moment, making it difficult to find your server on the internet. Dynamic DNS is a way to always be able to find your home server using conistent domain name. This guide will walkyu through setting p dynamic DNS with the privider www.noip.com. </p>
 <h5 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1"></a>Step 1</h5><p>First we have to get us a free subdomain with DynDNS. Therefore we register us for free at No-IP.com. We are going to be using the free option. </p>
@@ -32,7 +32,7 @@
 <h5 id="Step-5"><a href="#Step-5" class="headerlink" title="Step 5"></a>Step 5</h5><p>Now we have to start the installed application using the following command.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo noip2</div></pre></td></tr></table></figure></p>
 <h5 id="Step-6"><a href="#Step-6" class="headerlink" title="Step 6"></a>Step 6</h5><p>If you want that the update will start automatically with the client Raspberry Pi and thus always updates the IP, you can to create a crontab.<br><code>crontab -e</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@reboot <span class="built_in">cd</span> /home/pi/noip &amp;&amp; sudo noip2</div></pre></td></tr></table></figure>
-<p>Now forward the ports on whatever web services you will be using with your custom domain </p>
+<p>Now forward the ports on whatever web services you will be using with your custom domain.</p>
 ]]></content>
     
     <summary type="html">
@@ -155,7 +155,7 @@
     <link href="https://jacksonjs.github.io/2016/07/29/dockerWordpressEncrypt/"/>
     <id>https://jacksonjs.github.io/2016/07/29/dockerWordpressEncrypt/</id>
     <published>2016-07-30T06:00:25.000Z</published>
-    <updated>2016-08-04T06:13:07.537Z</updated>
+    <updated>2016-08-16T00:16:53.824Z</updated>
     
     <content type="html"><![CDATA[<h5 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h5><p>I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Seemed challenging.</p>
 <p>Luckily for me, the project <a href="https://github.com/steveltn/https-portal">HTTPS-PORTAL</a> is is working order and being actively developed! </p>
@@ -184,7 +184,7 @@
 <p>And restart them in detatched mode</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up <span class="_">-d</span></div></pre></td></tr></table></figure>
 <p>Hooray, our upload limit is now increased! We can now upload media up to 64MB.</p>
-<h5 id="My-Running-Sites"><a href="#My-Running-Sites" class="headerlink" title="My Running Sites"></a>My Running Sites</h5><p>You can visit the site I generated this way at <a href="https://news.containerize.us">https://news.containerize.us</a></p>
+<h5 id="My-Running-Sites-Currently-offline"><a href="#My-Running-Sites-Currently-offline" class="headerlink" title="My Running Sites (Currently offline)"></a>My Running Sites (Currently offline)</h5><p>You can visit the site I generated this way at <a href="https://news.containerize.us">https://news.containerize.us</a></p>
 <p>Also, using keys a generate with HTTPS-PORTAL, I created a <a href="https://www.mattermost.org/">Mattermost</a> instance.</p>
 <h3 id="Click-here-to-join-my-Containers-Mattermost-group"><a href="#Click-here-to-join-my-Containers-Mattermost-group" class="headerlink" title="Click here to join my Containers Mattermost group."></a><a href="https://plz.containerize.us:4430/signup_user_complete/?id=xdea87cuw7ripqc6ib5995ep9y">Click here to join my Containers Mattermost group.</a></h3>]]></content>
     
