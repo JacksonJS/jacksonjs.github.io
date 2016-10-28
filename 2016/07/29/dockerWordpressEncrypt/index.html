@@ -1,0 +1,423 @@
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="">
+<head>
+  <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <meta name="author" content="JacksonJS">
+  
+  
+  
+  
+    <meta name="description" content="IntroI had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Seemed challenging.
+Luckily for me, the proj...">
+  
+  <title>Let's Encrypt, Docker, and WordPress [ JacksonJS ]</title>
+  
+    <link rel="alternate" href="/atom.xml" title="JacksonJS">
+  
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+  
+  <link rel="stylesheet" href="/css/random.css">
+<link rel="stylesheet" href="/css/vegas.min.css">
+<link rel="stylesheet" href="/css/highlight-railscasts.css">
+<link rel="stylesheet" href="/css/jquery.fancybox.css">
+<link rel="stylesheet" href="/css/iconfont/iconfont.css">
+<link rel="stylesheet" href="/css/jquery.fancybox-thumbs.css">
+<link rel="stylesheet" href="/css/plyr.css">
+  
+</head>
+
+<body>
+<div class="side-navigate hide-area">
+  
+    <div class="item prev">
+      <a href="/2016/08/01/google-drive-ocamlfuse/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Mounting Google Drive on the Linux Desktop
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2016/07/24/twitterBot/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Creating a Twitter Bot with Node.js
+      </div>
+    </div>
+  
+</div>
+<div id="outer-container" class="hide-area">
+<div id="container">
+  <div id="menu-outer" class="slide-down">
+    <div id="menu-inner">
+      <div id="brand">
+        
+        <a onClick="openUserCard()">
+          <img id="avatar" src="https://my.mixtape.moe/xfhovy.jpg"/>
+          <div id="homelink">JacksonJS</div>
+        </a>
+      </div>
+      <div id="menu-list">
+        <ul>
+        
+        
+          
+            <li>
+          
+            <a href="/index.html">Home</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/archives">Archives</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/myTechStack">MyStack</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/about">About</a>
+            
+          </li>
+        
+          
+            <li>
+          
+            <a href="/contact">Contact</a>
+            
+          </li>
+        
+        </ul>
+      </div>
+      <div id="show-menu">
+        <button>Menu</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="content-outer">
+    <div id="content-inner">
+      
+      
+  <article id="post">
+    <h1>Let's Encrypt, Docker, and WordPress</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">撰写于 2016-07-29</span>
+      
+        <span id = "post-title-updated">修改于 2016-08-15</span>
+      
+      
+      
+      <span id = "post-title-tags">
+      标签
+      
+      
+        
+        
+        <a href="/tags/docker/">Docker</a>
+      
+        
+          /
+        
+        
+        <a href="/tags/let-s-encrypt/">Let's Encrypt</a>
+      
+        
+          /
+        
+        
+        <a href="/tags/wordpress/">Wordpress</a>
+      
+        
+          /
+        
+        
+        <a href="/tags/mattermost/">Mattermost</a>
+      
+        
+          /
+        
+        
+        <a href="/tags/nginx/">NGINX</a>
+      
+      </span>
+      
+    </p>
+    
+    <h5 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h5><p>I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Seemed challenging.</p>
+<p>Luckily for me, the project <a href="https://github.com/steveltn/https-portal">HTTPS-PORTAL</a> is is working order and being actively developed! </p>
+<p>Using <a href="https://letsencrypt.org/">Let’s Encrypt’s</a> certificate automation, I was able to set up an HTTPS wordpress install in under five minutes. Here are some reasons why sites should be using HTTPS:</p>
+<ul>
+<li><p>HTTPS helps prevent intruders from tampering with the communications between your websites and your users’ browsers. Intruders include intentionally malicious attackers, and legitimate but intrusive companies, such as ISPs or hotels that inject ads into pages.</p>
+</li>
+<li><p>HTTPS prevents intruders from being able to passively listen in on the communications between your websites and your users.</p>
+</li>
+<li><p>It is much cheaper and faster to imlement because of the Let’s Encrypt project!</p>
+</li>
+</ul>
+<p>I followed <a href="http://steveltn.me/2015/12/18/nginx-acme/">this tutorial </a> to get me up and running with my wordpress install. I had some problems understanding how to write a docker-compose file, but the blog author was very quick in helping to correct my mistakes. </p>
+<h5 id="Compose"><a href="#Compose" class="headerlink" title="Compose"></a>Compose</h5><p>Here is what my docker-compose.yml file contained, minus the real password:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># docker-compose.yml for my_wordpress site</span></div><div class="line"></div><div class="line">https-portal:</div><div class="line">  image: steveltn/https-portal</div><div class="line">  ports:</div><div class="line">    - 80:80</div><div class="line">    - 443:443</div><div class="line">  links:</div><div class="line">    - wordpress</div><div class="line">  environment:</div><div class="line">    - <span class="string">"DOMAINS=containerize.us -&gt; http://wordpress"</span> <span class="comment">#maps https-portal to the wordpress image</span></div><div class="line">    - <span class="string">"PRODUCTION=true"</span> <span class="comment">#ensures that the certificate will be recognized as valid by web browsers</span></div><div class="line"></div><div class="line">wordpress:</div><div class="line">  image: wordpress</div><div class="line">  links:</div><div class="line">    - db:mysql</div><div class="line"></div><div class="line">db:</div><div class="line">  image: mariadb</div><div class="line">  ports:</div><div class="line">    - 3306:3306</div><div class="line">  environment:</div><div class="line">    MYSQL_ROOT_PASSWORD: <span class="string">'&lt;secure_password&gt;'</span></div></pre></td></tr></table></figure>
+<p>In the docker-compose.yml directory, run the command to start the containers:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up</div></pre></td></tr></table></figure>
+<p>After the server generates a TLS Diffie-Hellman key and spins up the WordPress instance, we have our WordPress site installed! </p>
+<h5 id="Increase-Upload-Allowance"><a href="#Increase-Upload-Allowance" class="headerlink" title="Increase Upload Allowance"></a>Increase Upload Allowance</h5><p>Now let’s insert some media. While you could just embed everything from an external site like youtube and imagur, it is nice to have the option to host your own assets.  Right now, the upload limit is a puny 2MB. Let’s change it to 64MB.</p>
+<p>To enter the running container, type:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker <span class="built_in">exec</span> -i -t mywordpress_wordpress_1 bash</div></pre></td></tr></table></figure>
+<p>To install the nano text editor, type:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">apt-get update</div><div class="line">apt-get install nano</div></pre></td></tr></table></figure></p>
+<p>Create the file php.ini in you WordPress root directory.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi php.ini</div></pre></td></tr></table></figure></p>
+<p>Once in, paste these lines:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">upload_max_filesize = 64M</div><div class="line">post_max_size = 64M</div><div class="line">memory_<span class="built_in">limit</span> = 64M</div></pre></td></tr></table></figure></p>
+<p>Stop the running containers…<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose stop</div></pre></td></tr></table></figure></p>
+<p>And restart them in detatched mode</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker-compose up <span class="_">-d</span></div></pre></td></tr></table></figure>
+<p>Hooray, our upload limit is now increased! We can now upload media up to 64MB.</p>
+<h5 id="My-Running-Sites-Currently-offline"><a href="#My-Running-Sites-Currently-offline" class="headerlink" title="My Running Sites (Currently offline)"></a>My Running Sites (Currently offline)</h5><p>You can visit the site I generated this way at <a href="https://news.containerize.us">https://news.containerize.us</a></p>
+<p>Also, using keys a generate with HTTPS-PORTAL, I created a <a href="https://www.mattermost.org/">Mattermost</a> instance.</p>
+<h3 id="Click-here-to-join-my-Containers-Mattermost-group"><a href="#Click-here-to-join-my-Containers-Mattermost-group" class="headerlink" title="Click here to join my Containers Mattermost group."></a><a href="https://plz.containerize.us:4430/signup_user_complete/?id=xdea87cuw7ripqc6ib5995ep9y">Click here to join my Containers Mattermost group.</a></h3>
+  </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <div class="random-toc">
+    <h2>目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Intro"><span class="toc-text">Intro</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Compose"><span class="toc-text">Compose</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Increase-Upload-Allowance"><span class="toc-text">Increase Upload Allowance</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#My-Running-Sites-Currently-offline"><span class="toc-text">My Running Sites (Currently offline)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Click-here-to-join-my-Containers-Mattermost-group"><span class="toc-text">Click here to join my Containers Mattermost group.</span></a>
+  </div>
+</div>
+
+  
+<nav id="pagination">
+  
+    <a href="/2016/08/01/google-drive-ocamlfuse/" class="prev">&larr; 上一篇 Mounting Google Drive on the Linux Desktop</a>
+  
+
+  
+
+  
+    <a href="/2016/07/24/twitterBot/" class="next">下一篇 Creating a Twitter Bot with Node.js &rarr;</a>
+  
+</nav>
+
+  <!-- JiaThis Button BEGIN -->
+
+<!-- JiaThis Button END -->
+
+
+      
+      
+      
+      <div id="disqus_thread"></div>
+      
+    </div>
+  </div>
+
+  <div id="bottom-outer">
+    <div id="bottom-inner">
+      Site by JacksonJS using
+      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="disqus_thread"></div>
+<script>
+/**
+* RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+* LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+
+s.src = '//jacksonjs.disqus.com/embed.js';
+
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
+
+<div id="user-card">
+  <div class="center-field">
+    <img class="avatar" src="https://my.mixtape.moe/xfhovy.jpg">
+    <p id="description"></p>
+    <ul class="social-icon">
+  
+  
+    <li>
+      <a href="https://github.com/jacksonjs">
+        
+          <i class="icon iconfont github">&#xe606;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://twitter.com/jstokesjs">
+        
+          <i class="icon iconfont twitter">&#xe600;</i>
+        
+      </a>
+    </li>
+  
+    <li>
+      <a href="https://keybase.io/jacksonjs">
+        
+          Key
+        
+      </a>
+    </li>
+  
+</ul>
+
+  </div>
+</div>
+
+
+<div id="btn-view">Hide</div>
+
+<script>
+// is trigger analytics / tongji script
+var isIgnoreHost = false;
+
+if(window && window.location && window.location.host) {
+  isIgnoreHost = ["localhost","127.0.0.1"].some(function(address){
+    return 0 === window.location.host.indexOf(address);
+  });
+}
+
+var isTriggerAnalytics = !( true && isIgnoreHost );
+
+</script>
+
+
+  <script>
+if(isTriggerAnalytics) {
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-78536565-2', 'auto');
+  ga('send', 'pageview');
+}
+
+</script>
+
+
+
+  
+  
+    <script src="/js/jquery-2.2.3.min.js"></script>
+  
+    <script src="/js/vegas.min.js"></script>
+  
+    <script src="/js/random.js"></script>
+  
+    <script src="/js/highlight.pack.js"></script>
+  
+    <script src="/js/jquery.mousewheel.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox.pack.js"></script>
+  
+    <script src="/js/jquery.fancybox-thumbs.js"></script>
+  
+    <script src="/js/plyr.js"></script>
+  
+
+<script>
+
+  // fancybox
+  var backgroundImages = [];
+  
+  $('#post').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox') || $(this).parent().hasClass('fancybox-thumb')) return;
+      var alt = this.alt || this.title;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'post' + i);
+    });
+  });
+  $(".fancybox").fancybox();
+
+var vegasConfig = {"preload­Image":true,"transition":["slideLeft2","slideRight2","flash2"],"timer":true,"delay":5000,"shuffle":true,"count":28};
+var unsplashConfig = {"gravity":"north","avatar":"https://my.mixtape.moe/bztdjp.jpg"};
+var turnoffBackgroundImage = false;
+var backgroundColor = "446CB3";
+
+$(".fancybox-thumb").fancybox({
+  prevEffect: 'none',
+  nextEffect: 'none',
+  helpers: {
+    title: {
+      type: 'outside'
+    },
+    thumbs: {
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+// show video with plyr
+$(".video-container iframe").each(function(i){
+  var url = $(this).attr('src');
+  var id = url.split('/').pop();
+  var plyrContainer = document.createElement('div');
+  plyrContainer.className = 'plyr';
+  var plyrElement = document.createElement('div');
+  plyrElement.dataset.videoId = id;
+  switch(true) {
+    case url.search('youtube.com') >= 0:
+      plyrElement.dataset.type = 'youtube';
+      break;
+    case url.search('vimeo.com') >= 0:
+      plyrElement.dataset.type = 'vimeo';
+      break;
+    default:
+      return;
+  };
+  plyrContainer.appendChild(plyrElement);
+  $(this).parent().html(plyrContainer);
+});
+plyr.setup('.plyr', {iconUrl: '/css/sprite.svg'});
+</script>
+</body>
+</html>
+

@@ -16,9 +16,9 @@
   
   
   
-    <meta name="description" content="I am a full-stack web developer and Linux system administrator who s effective in implementing and leading software solutions that people need. I enjoy learning new technologies and best their prac...">
+    <meta name="description" content="Mount Google Drive on your Linux DesktopI had to share this little gem of a program. Many people have a google drive account, but in linux there was no convienent way to access your files from the ...">
   
-  <title>About [ JacksonJS ]</title>
+  <title>Mounting Google Drive on the Linux Desktop [ JacksonJS ]</title>
   
     <link rel="alternate" href="/atom.xml" title="JacksonJS">
   
@@ -39,6 +39,24 @@
 <body>
 <div class="side-navigate hide-area">
   
+    <div class="item prev">
+      <a href="/2016/08/03/prosodyonpi/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Install Prosody XMPP Server on your Raspberry Pi
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2016/07/29/dockerWordpressEncrypt/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Let's Encrypt, Docker, and WordPress
+      </div>
+    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -78,7 +96,7 @@
           </li>
         
           
-            <li class="active">
+            <li>
           
             <a href="/about">About</a>
             
@@ -103,25 +121,70 @@
     <div id="content-inner">
       
       
-  <article id="page">
-    
-    
-      <h1 class="">About</h1>
+  <article id="post">
+    <h1>Mounting Google Drive on the Linux Desktop</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">撰写于 2016-08-01</span>
       
-      <p>I am a full-stack web developer and Linux system administrator who s effective in implementing and leading software solutions that people need. I enjoy learning new technologies and best their practices, with the ongoing goal of becoming a complete and integral professional. </p>
-<p>I enjoy creatng software that solves real problems, with a focus of customer and team satisfaction by delivering the best work possible within project deadlines. Quality and progress should always be defined and measurable. I am an agile and pragmatic developer, comfortable choosing the best tool for every job. Refactoring, testing and documentation is an integral part of every product’s needs to assure quality.</p>
-<p>Being a clear communicator and results driven person who is highly knowledgeable and experienced, I can be effective both with a team and independently. I love learning new tools and creating new technology solutions.</p>
-<p><img src="https://my.mixtape.moe/lxthcy.jpg" alt="myBestPicture"></p>
-
+        <span id = "post-title-updated">修改于 2016-08-01</span>
+      
+      
+      
+      <span id = "post-title-tags">
+      标签
+      
+      
+        
+        
+        <a href="/tags/google-drive/">Google-Drive</a>
+      
+        
+          /
+        
+        
+        <a href="/tags/linux/">Linux</a>
+      
+        
+          /
+        
+        
+        <a href="/tags/desktop/">Desktop</a>
+      
+      </span>
+      
+    </p>
     
+    <h1 id="Mount-Google-Drive-on-your-Linux-Desktop"><a href="#Mount-Google-Drive-on-your-Linux-Desktop" class="headerlink" title="Mount Google Drive on your Linux Desktop"></a>Mount Google Drive on your Linux Desktop</h1><p>I had to share this little gem of a program. Many people have a google drive account, but in linux there was no convienent way to access your files from the Desktop. This program allows you to mount your drive files on your desktop, eliminating the need to sync and waste valuable hard drive space. The souce can be obtained <a href="https://github.com/astrada/google-drive-ocamlfuse">here</a>. </p>
+<h3 id="Download"><a href="#Download" class="headerlink" title="Download:"></a>Download:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:alessandro-strada/ppa</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install google-drive-ocamlfuse</div></pre></td></tr></table></figure>
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage:"></a>Usage:</h3><p>The first time, you can run google-drive-ocamlfuse without parameters:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">google-drive-ocamlfuse</div></pre></td></tr></table></figure>
+<p>This command will create the default application directory (~/.gdfuse/default), containing the configuration file config (see the wiki page for more details about configuration). And it will start a web browser to obtain authorization to access your Google Drive. This will let you modify default configuration before mounting the filesystem.</p>
+<p>Then you can mount the filesystem:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">google-drive-ocamlfuse mountpoint</div></pre></td></tr></table></figure>
+<p>If you have more than one account, you can run:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">google-drive-ocamlfuse -label label [mountpoint]</div></pre></td></tr></table></figure>
+<p>Using label to distinguish different accounts. The program will use the directory ~/.gdfuse/label to host configuration, application state, and file cache. No file is shared among different accounts, so you can have a different configuration for each one.</p>
+
   </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <div class="random-toc">
+    <h2>目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mount-Google-Drive-on-your-Linux-Desktop"><span class="toc-text">Mount Google Drive on your Linux Desktop</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Download"><span class="toc-text">Download:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Usage"><span class="toc-text">Usage:</span></a></li></ol></li></ol></li></ol>
+  </div>
+</div>
 
   
 <nav id="pagination">
   
+    <a href="/2016/08/03/prosodyonpi/" class="prev">&larr; 上一篇 Install Prosody XMPP Server on your Raspberry Pi</a>
+  
 
   
 
+  
+    <a href="/2016/07/29/dockerWordpressEncrypt/" class="next">下一篇 Let's Encrypt, Docker, and WordPress &rarr;</a>
   
 </nav>
 

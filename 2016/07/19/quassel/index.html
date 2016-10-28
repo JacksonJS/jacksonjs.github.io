@@ -16,9 +16,9 @@
   
   
   
-    <meta name="description" content="I am a full-stack web developer and Linux system administrator who s effective in implementing and leading software solutions that people need. I enjoy learning new technologies and best their prac...">
+    <meta name="description" content="Quassel IRC is a modern, cross platform, distrubuted IRC client. It requires users to set up both the server (QuasselreCore) and a client. The client attaches to the core, which saves all the IRC i...">
   
-  <title>About [ JacksonJS ]</title>
+  <title>Quassel IRC [ JacksonJS ]</title>
   
     <link rel="alternate" href="/atom.xml" title="JacksonJS">
   
@@ -39,6 +39,24 @@
 <body>
 <div class="side-navigate hide-area">
   
+    <div class="item prev">
+      <a href="/2016/07/24/twitterBot/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Creating a Twitter Bot with Node.js
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2016/07/10/podcasts/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Podcasts
+      </div>
+    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -78,7 +96,7 @@
           </li>
         
           
-            <li class="active">
+            <li>
           
             <a href="/about">About</a>
             
@@ -103,25 +121,92 @@
     <div id="content-inner">
       
       
-  <article id="page">
-    
-    
-      <h1 class="">About</h1>
+  <article id="post">
+    <h1>Quassel IRC</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">撰写于 2016-07-19</span>
       
-      <p>I am a full-stack web developer and Linux system administrator who s effective in implementing and leading software solutions that people need. I enjoy learning new technologies and best their practices, with the ongoing goal of becoming a complete and integral professional. </p>
-<p>I enjoy creatng software that solves real problems, with a focus of customer and team satisfaction by delivering the best work possible within project deadlines. Quality and progress should always be defined and measurable. I am an agile and pragmatic developer, comfortable choosing the best tool for every job. Refactoring, testing and documentation is an integral part of every product’s needs to assure quality.</p>
-<p>Being a clear communicator and results driven person who is highly knowledgeable and experienced, I can be effective both with a team and independently. I love learning new tools and creating new technology solutions.</p>
-<p><img src="https://my.mixtape.moe/lxthcy.jpg" alt="myBestPicture"></p>
-
+        <span id = "post-title-updated">修改于 2016-07-30</span>
+      
+      
+      
+      <span id = "post-title-tags">
+      标签
+      
+      
+        
+        
+        <a href="/tags/irc/">IRC</a>
+      
+        
+          /
+        
+        
+        <a href="/tags/vps/">VPS</a>
+      
+        
+          /
+        
+        
+        <a href="/tags/quassel/">Quassel</a>
+      
+        
+          /
+        
+        
+        <a href="/tags/sqlite/">SQLite</a>
+      
+      </span>
+      
+    </p>
     
+    <p>Quassel IRC is a modern, cross platform, distrubuted IRC client. It requires users to set up both the server (QuasselreCore) and a client. The client attaches to the core, which saves all the IRC info. You can create new users that have seperate profiles and channels from each other, allowing multiple people to use the same core without messing up each others settings.</p>
+<p>I will assume you have an ubuntu 14.04 Digital Ocean droplet to install your Quasselcore. When we install, we will be using the SQlite database so that we can use the manaers.py script later to add and manage multiple users.</p>
+<p>SSH into your <strong>server</strong>.</p>
+<p>Add repository</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:mamarley/quassel</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install quassel-core</div></pre></td></tr></table></figure>
+<p>Check that Quasselcore is running (I’m using sudo to display the process name)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo netstat -tulpn</div></pre></td></tr></table></figure></p>
+<p>Output should be almost identical to:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tcp6       0      0 :::4242                 :::*                    LISTEN      764/quasselcore</div></pre></td></tr></table></figure></p>
+<p>On <strong>client</strong> computer, add repo:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:mamarley/quassel</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install quasselclient</div></pre></td></tr></table></figure>
+<p>Connect your Quassel Client to your server and follow the setup wizard.</p>
+<p>Create Admin User:<br><img src="./../quassel/createAdmin.png" alt="setup_core"></p>
+<p>Use the default sqlite database:<br><img src="./../quassel/selectStorage.png" alt="selectStorage"></p>
+<p>Accept the self-signed certificate:<br><img src="./../quassel/accpet_untrusted_cert.png" alt="accept_untrusted_cert"></p>
+<p>Add core accounts:<br><img src="./../quassel/setup_core.png" alt="setup_core"></p>
+<p><img src="./../quassel/setup_core_account_edit.png" alt="setup_account"></p>
+<p>Setup your networks:<br><img src="./../quassel/setup_network.png" alt="setupNetwork"></p>
+<p>Now we will configure Quassel to add users. We cannot do this in the gui, we must do it as root in the core. </p>
+<p>First, logout of Quassel on your devices (just to play it safe so we don’t have to do an entire reinstallation).</p>
+<p>In your VPS, go to /var/lib/quassel/</p>
+<p>Copy the manageusers.py file from <a href="https://github.com/eugeii/quassel-manage-users">this GitHub repo</a></p>
+<p>Run the script.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./manageusers.py &lt;user&gt; &lt;password&gt;</div></pre></td></tr></table></figure></p>
+<p>Open up a new instance of Quasselclient, add the server and user information, and set it up just like before. </p>
+<p>Boom, you now have a persistent IRC connection!</p>
+<h1 id="NOTE"><a href="#NOTE" class="headerlink" title="NOTE:"></a>NOTE:</h1><p>If your SQlite database gets too big for your liking you can reduce its size using <a href="https://gist.github.com/ddrown/d7d2abbdf533b058a0c4">this</a> script or this <a href="https://gist.github.com/Taverius/1f7f2d61d8469dec2ce9">other script that includes making a backup</a>. </p>
+<p><a href="https://gist.github.com/Und3rf10w/36a2034cb2c8eafbfb801c1a89e1f8bc">Here</a> is a weekly purge.</p>
+<p><a href="https://gist.github.com/Furyhunter/7d5649eac69541ac783c">Another</a> method, this time running an sqlite command.</p>
+
   </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <div class="random-toc">
+    <h2>目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NOTE"><span class="toc-text">NOTE:</span></a></li></ol>
+  </div>
+</div>
 
   
 <nav id="pagination">
   
+    <a href="/2016/07/24/twitterBot/" class="prev">&larr; 上一篇 Creating a Twitter Bot with Node.js</a>
+  
 
   
 
+  
+    <a href="/2016/07/10/podcasts/" class="next">下一篇 Podcasts &rarr;</a>
   
 </nav>
 

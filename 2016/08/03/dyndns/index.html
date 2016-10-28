@@ -16,9 +16,9 @@
   
   
   
-    <meta name="description" content="I am a full-stack web developer and Linux system administrator who s effective in implementing and leading software solutions that people need. I enjoy learning new technologies and best their prac...">
+    <meta name="description" content="Serving internet content from your home address can be difficult. Your ISP may change your IP address at any given moment, making it difficult to find your server on the internet. Dynamic DNS is a ...">
   
-  <title>About [ JacksonJS ]</title>
+  <title>DynDNS [ JacksonJS ]</title>
   
     <link rel="alternate" href="/atom.xml" title="JacksonJS">
   
@@ -39,6 +39,15 @@
 <body>
 <div class="side-navigate hide-area">
   
+  
+    <div class="item next">
+      <a href="/2016/08/03/prosodyonpi/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Install Prosody XMPP Server on your Raspberry Pi
+      </div>
+    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -78,7 +87,7 @@
           </li>
         
           
-            <li class="active">
+            <li>
           
             <a href="/about">About</a>
             
@@ -103,18 +112,54 @@
     <div id="content-inner">
       
       
-  <article id="page">
-    
-    
-      <h1 class="">About</h1>
+  <article id="post">
+    <h1>DynDNS</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">撰写于 2016-08-03</span>
       
-      <p>I am a full-stack web developer and Linux system administrator who s effective in implementing and leading software solutions that people need. I enjoy learning new technologies and best their practices, with the ongoing goal of becoming a complete and integral professional. </p>
-<p>I enjoy creatng software that solves real problems, with a focus of customer and team satisfaction by delivering the best work possible within project deadlines. Quality and progress should always be defined and measurable. I am an agile and pragmatic developer, comfortable choosing the best tool for every job. Refactoring, testing and documentation is an integral part of every product’s needs to assure quality.</p>
-<p>Being a clear communicator and results driven person who is highly knowledgeable and experienced, I can be effective both with a team and independently. I love learning new tools and creating new technology solutions.</p>
-<p><img src="https://my.mixtape.moe/lxthcy.jpg" alt="myBestPicture"></p>
-
+        <span id = "post-title-updated">修改于 2016-08-08</span>
+      
+      
+      
+      <span id = "post-title-tags">
+      标签
+      
+      
+        
+        
+        <a href="/tags/dynamic-dns/">Dynamic DNS</a>
+      
+        
+          /
+        
+        
+        <a href="/tags/hosting/">Hosting</a>
+      
+      </span>
+      
+    </p>
     
+    <p>Serving internet content from your home address can be difficult. Your ISP may change your IP address at any given moment, making it difficult to find your server on the internet. Dynamic DNS is a way to always be able to find your home server using conistent domain name. This guide will walkyu through setting p dynamic DNS with the privider www.noip.com. </p>
+<h5 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1"></a>Step 1</h5><p>First we have to get us a free subdomain with DynDNS. Therefore we register us for free at No-IP.com. We are going to be using the free option. </p>
+<h5 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a>Step 2</h5><p>Now we install the  No-IP.com the Dynamic DNS Update client for Linux on our Raspberry Pi and unpack it. He will later check every few minutes to see if the IP address has changed, if so, notify the application this No-IP.com with, so your subdomain refers again to the current IP address of Raspberry Pis.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget http://www.noip.com/client/linux/noip-duc-linux.tar.gz</div><div class="line">tar xf noip-duc-linux.tar.gz</div><div class="line">rm noip-duc-linux.tar.gz</div></pre></td></tr></table></figure>
+<h5 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a>Step 3</h5><p>Rename directory and enter:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mv noip-* noip</div><div class="line"><span class="built_in">cd</span> noip</div></pre></td></tr></table></figure>
+<h5 id="Step-4"><a href="#Step-4" class="headerlink" title="Step 4"></a>Step 4</h5><p>Now we install the application. At the end of this call we are asked for our e-mail address of the No-IP.com account, our password, and the subdomain and the update interval. Here we enter our data.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo make install</div></pre></td></tr></table></figure></p>
+<h5 id="Step-5"><a href="#Step-5" class="headerlink" title="Step 5"></a>Step 5</h5><p>Now we have to start the installed application using the following command.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo noip2</div></pre></td></tr></table></figure></p>
+<h5 id="Step-6"><a href="#Step-6" class="headerlink" title="Step 6"></a>Step 6</h5><p>If you want that the update will start automatically with the client Raspberry Pi and thus always updates the IP, you can to create a crontab.<br><code>crontab -e</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@reboot <span class="built_in">cd</span> /home/pi/noip &amp;&amp; sudo noip2</div></pre></td></tr></table></figure>
+<p>Now forward the ports on whatever web services you will be using with your custom domain.</p>
+
   </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <div class="random-toc">
+    <h2>目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-1"><span class="toc-text">Step 1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-2"><span class="toc-text">Step 2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-3"><span class="toc-text">Step 3</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-4"><span class="toc-text">Step 4</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-5"><span class="toc-text">Step 5</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-6"><span class="toc-text">Step 6</span></a></li></ol>
+  </div>
+</div>
 
   
 <nav id="pagination">
@@ -122,6 +167,8 @@
 
   
 
+  
+    <a href="/2016/08/03/prosodyonpi/" class="next">下一篇 Install Prosody XMPP Server on your Raspberry Pi &rarr;</a>
   
 </nav>
 

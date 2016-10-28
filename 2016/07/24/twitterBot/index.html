@@ -16,9 +16,10 @@
   
   
   
-    <meta name="description" content="I am a full-stack web developer and Linux system administrator who s effective in implementing and leading software solutions that people need. I enjoy learning new technologies and best their prac...">
+    <meta name="description" content="I am a huge fan of the television program Shark Tank. To have more fun watching it, I decided to make a twitter bot that would retweet anything that included the searchable hashtag #SharkTank. 
+Thi...">
   
-  <title>About [ JacksonJS ]</title>
+  <title>Creating a Twitter Bot with Node.js [ JacksonJS ]</title>
   
     <link rel="alternate" href="/atom.xml" title="JacksonJS">
   
@@ -39,6 +40,24 @@
 <body>
 <div class="side-navigate hide-area">
   
+    <div class="item prev">
+      <a href="/2016/07/29/dockerWordpressEncrypt/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Let's Encrypt, Docker, and WordPress
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2016/07/19/quassel/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Quassel IRC
+      </div>
+    </div>
   
 </div>
 <div id="outer-container" class="hide-area">
@@ -78,7 +97,7 @@
           </li>
         
           
-            <li class="active">
+            <li>
           
             <a href="/about">About</a>
             
@@ -103,25 +122,86 @@
     <div id="content-inner">
       
       
-  <article id="page">
-    
-    
-      <h1 class="">About</h1>
+  <article id="post">
+    <h1>Creating a Twitter Bot with Node.js</h1>
+    <p class="page-title-sub">
+      <span id = "post-title-date">撰写于 2016-07-24</span>
       
-      <p>I am a full-stack web developer and Linux system administrator who s effective in implementing and leading software solutions that people need. I enjoy learning new technologies and best their practices, with the ongoing goal of becoming a complete and integral professional. </p>
-<p>I enjoy creatng software that solves real problems, with a focus of customer and team satisfaction by delivering the best work possible within project deadlines. Quality and progress should always be defined and measurable. I am an agile and pragmatic developer, comfortable choosing the best tool for every job. Refactoring, testing and documentation is an integral part of every product’s needs to assure quality.</p>
-<p>Being a clear communicator and results driven person who is highly knowledgeable and experienced, I can be effective both with a team and independently. I love learning new tools and creating new technology solutions.</p>
-<p><img src="https://my.mixtape.moe/lxthcy.jpg" alt="myBestPicture"></p>
-
+        <span id = "post-title-updated">修改于 2016-08-01</span>
+      
+      
+      
+      <span id = "post-title-tags">
+      标签
+      
+      
+        
+        
+        <a href="/tags/javascript/">Javascript</a>
+      
+        
+          /
+        
+        
+        <a href="/tags/node/">Node</a>
+      
+        
+          /
+        
+        
+        <a href="/tags/twitter/">Twitter</a>
+      
+        
+          /
+        
+        
+        <a href="/tags/api/">API</a>
+      
+      </span>
+      
+    </p>
     
+    <p> I am a huge fan of the television program <a href="http://abc.go.com/shows/shark-tank">Shark Tank</a>. To have more fun watching it, I decided to make a twitter bot that would retweet anything that included the searchable hashtag <a href="https://twitter.com/search?q=%23SharkTank&amp;src=tyah">#SharkTank</a>. </p>
+<p>This wasn’t a very hard of a project, there are already many tutorials and boiler plates for getting a bot up and running on Node.js with the Twitter API. You can find the source code to my bot <a href="https://github.com/JacksonJS/sharkTankBot">here</a>.</p>
+<p>Clone the git repo <code>git clone https://github.com/JacksonJS/sharkTankBot.git</code> and setup your Twitter account for <a href="https://apps.twitter.com/">apps</a>, and plugin your credentials into config.js</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  consumer_key: 'use',</div><div class="line">  consumer_secret: 'your',</div><div class="line">  access_token: 'own',</div><div class="line">  access_token_secret: 'tokens&amp;keys'</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Run <code>npm install</code> in your root folder, allow the dependencies to be downloaded, and then run:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node bot.js</div></pre></td></tr></table></figure></p>
+<p><a class="twitter-timeline" href="https://twitter.com/SharkTankBot" data-widget-id="733562729961639936">Tweets by @SharkTankBot</a></p>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+<p>Super easy!</p>
+<hr>
+<h5 id="There-are-several-guides-to-help-you-start-making-a-bot-and-I-used-https-github-com-nisrulz-twitterbot-nodejs-as-a-starting-point-for-SharkTankBot"><a href="#There-are-several-guides-to-help-you-start-making-a-bot-and-I-used-https-github-com-nisrulz-twitterbot-nodejs-as-a-starting-point-for-SharkTankBot" class="headerlink" title="There are several guides to help you start making a bot, and I used https://github.com/nisrulz/twitterbot-nodejs  as a starting point for @SharkTankBot."></a>There are several guides to help you start making a bot, and I used <a href="https://nisrulz.github.io/twitterbot-nodejs/">https://github.com/nisrulz/twitterbot-nodejs</a>  as a starting point for <a href="https://twitter.com/SharkTankBot">@SharkTankBot</a>.</h5><hr>
+<h5 id="Info-for-using-the-Twitter-API-Client-for-node-is-located-here"><a href="#Info-for-using-the-Twitter-API-Client-for-node-is-located-here" class="headerlink" title="Info for using the Twitter API Client for node is located here"></a>Info for using the Twitter API Client for node is located <a href="https://github.com/ttezel/twit">here</a></h5><hr>
+<p>Edit: I am now using the forever package for node to keep this bot from crashing. To use, run <code>npm install -g forever</code>. </p>
+<p>To start the bot, while in the bot root directory, run <code>forever start --spinSleepTime 10000 bot.js</code>.</p>
+<p>Instead of writing to the console, our logs will go somewhere in <code>~/.forever</code>. To locate the log for your currently running node project, run <code>forever list</code>. </p>
+<p>If you would like to see the live updates of logs, run <code>tail -f &lt;logfile&gt;</code>.</p>
+<hr>
+<p>I will update this post as I add new features to the bot. Have fun, and stay safe!</p>
+<h1 style="text-align: center; font-size: 5em">😎</h1>
+
+
   </article>
+  <div class="random-toc-area">
+  <button class="btn-hide-toc btn-hide-toc-show" style="display: none" onclick="TOCToggle()">显示目录</button>
+  <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">隐藏目录</button>
+  <div class="random-toc">
+    <h2>目录</h2>
+    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#There-are-several-guides-to-help-you-start-making-a-bot-and-I-used-https-github-com-nisrulz-twitterbot-nodejs-as-a-starting-point-for-SharkTankBot"><span class="toc-text">There are several guides to help you start making a bot, and I used https://github.com/nisrulz/twitterbot-nodejs  as a starting point for @SharkTankBot.</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Info-for-using-the-Twitter-API-Client-for-node-is-located-here"><span class="toc-text">Info for using the Twitter API Client for node is located here</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#undefined"><span class="toc-text">😎</span></a>
+  </div>
+</div>
 
   
 <nav id="pagination">
   
+    <a href="/2016/07/29/dockerWordpressEncrypt/" class="prev">&larr; 上一篇 Let's Encrypt, Docker, and WordPress</a>
+  
 
   
 
+  
+    <a href="/2016/07/19/quassel/" class="next">下一篇 Quassel IRC &rarr;</a>
   
 </nav>
 
