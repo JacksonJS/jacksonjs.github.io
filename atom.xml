@@ -5,11 +5,11 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://jacksonjs.github.io/"/>
-  <updated>2016-08-08T12:44:11.948Z</updated>
+  <updated>2016-11-02T09:39:24.660Z</updated>
   <id>https://jacksonjs.github.io/</id>
   
   <author>
-    <name>JacksonJS</name>
+    <name>Jackson Stokes</name>
     
   </author>
   
@@ -17,10 +17,10 @@
   
   <entry>
     <title>DynDNS</title>
-    <link href="https://jacksonjs.github.io/2016/08/03/dyndns/"/>
-    <id>https://jacksonjs.github.io/2016/08/03/dyndns/</id>
-    <published>2016-08-04T05:27:12.000Z</published>
-    <updated>2016-08-08T12:44:11.948Z</updated>
+    <link href="https://jacksonjs.github.io/2016/09/09/dyndns/"/>
+    <id>https://jacksonjs.github.io/2016/09/09/dyndns/</id>
+    <published>2016-09-10T05:27:12.000Z</published>
+    <updated>2016-11-02T09:39:24.660Z</updated>
     
     <content type="html"><![CDATA[<p>Serving internet content from your home address can be difficult. Your ISP may change your IP address at any given moment, making it difficult to find your server on the internet. Dynamic DNS is a way to always be able to find your home server using conistent domain name. This guide will walkyu through setting p dynamic DNS with the privider www.noip.com. </p>
 <h5 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1"></a>Step 1</h5><p>First we have to get us a free subdomain with DynDNS. Therefore we register us for free at No-IP.com. We are going to be using the free option. </p>
@@ -50,10 +50,10 @@
   
   <entry>
     <title>Install Prosody XMPP Server on your Raspberry Pi</title>
-    <link href="https://jacksonjs.github.io/2016/08/03/prosodyonpi/"/>
-    <id>https://jacksonjs.github.io/2016/08/03/prosodyonpi/</id>
-    <published>2016-08-04T04:58:08.000Z</published>
-    <updated>2016-08-07T04:49:39.099Z</updated>
+    <link href="https://jacksonjs.github.io/2016/09/09/prosodyonpi/"/>
+    <id>https://jacksonjs.github.io/2016/09/09/prosodyonpi/</id>
+    <published>2016-09-10T04:58:08.000Z</published>
+    <updated>2016-11-02T09:39:08.600Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><p>Extensible Messaging and Presence Protocol (XMPP) is a set of free and open technologies for instant messaging, multi-party chat, voice and video chat, and more. It is a federated system, meaning that a user from one XMPP server can messaging someone with a different account on another server. This guide will show you how to setup your own XMPP chat service on Ubuntu or Debian using the <a href="https://prosody.im/">Prosody</a> XMPP server. </p>
 <p>Use <a href="./../dyndns/index.html">this guide</a> to configure dynamic DNS on your raspberry pi if you would like to connect to a named domain. This is most likely essential if you are hosting your pi from your home.</p>
@@ -118,10 +118,10 @@
   
   <entry>
     <title>Mounting Google Drive on the Linux Desktop</title>
-    <link href="https://jacksonjs.github.io/2016/08/01/google-drive-ocamlfuse/"/>
-    <id>https://jacksonjs.github.io/2016/08/01/google-drive-ocamlfuse/</id>
-    <published>2016-08-01T07:31:31.000Z</published>
-    <updated>2016-08-01T07:35:28.249Z</updated>
+    <link href="https://jacksonjs.github.io/2016/08/29/google-drive-ocamlfuse/"/>
+    <id>https://jacksonjs.github.io/2016/08/29/google-drive-ocamlfuse/</id>
+    <published>2016-08-29T07:31:31.000Z</published>
+    <updated>2016-11-02T09:40:01.691Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Mount-Google-Drive-on-your-Linux-Desktop"><a href="#Mount-Google-Drive-on-your-Linux-Desktop" class="headerlink" title="Mount Google Drive on your Linux Desktop"></a>Mount Google Drive on your Linux Desktop</h1><p>I had to share this little gem of a program. Many people have a google drive account, but in linux there was no convienent way to access your files from the Desktop. This program allows you to mount your drive files on your desktop, eliminating the need to sync and waste valuable hard drive space. The souce can be obtained <a href="https://github.com/astrada/google-drive-ocamlfuse">here</a>. </p>
 <h3 id="Download"><a href="#Download" class="headerlink" title="Download:"></a>Download:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:alessandro-strada/ppa</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install google-drive-ocamlfuse</div></pre></td></tr></table></figure>
@@ -152,10 +152,10 @@
   
   <entry>
     <title>Let&#39;s Encrypt, Docker, and WordPress</title>
-    <link href="https://jacksonjs.github.io/2016/07/29/dockerWordpressEncrypt/"/>
-    <id>https://jacksonjs.github.io/2016/07/29/dockerWordpressEncrypt/</id>
-    <published>2016-07-30T06:00:25.000Z</published>
-    <updated>2016-08-16T00:16:53.824Z</updated>
+    <link href="https://jacksonjs.github.io/2016/08/18/dockerWordpressEncrypt/"/>
+    <id>https://jacksonjs.github.io/2016/08/18/dockerWordpressEncrypt/</id>
+    <published>2016-08-19T06:00:25.000Z</published>
+    <updated>2016-11-02T09:37:40.644Z</updated>
     
     <content type="html"><![CDATA[<h5 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h5><p>I had a specific problem that i wanted to solve: setting up a wordpress installation that had HTTPS, and it had to be inside of a docker container. Seemed challenging.</p>
 <p>Luckily for me, the project <a href="https://github.com/steveltn/https-portal">HTTPS-PORTAL</a> is is working order and being actively developed! </p>
@@ -209,10 +209,10 @@
   
   <entry>
     <title>Creating a Twitter Bot with Node.js</title>
-    <link href="https://jacksonjs.github.io/2016/07/24/twitterBot/"/>
-    <id>https://jacksonjs.github.io/2016/07/24/twitterBot/</id>
-    <published>2016-07-25T03:33:59.000Z</published>
-    <updated>2016-08-01T12:32:39.635Z</updated>
+    <link href="https://jacksonjs.github.io/2016/08/02/twitterBot/"/>
+    <id>https://jacksonjs.github.io/2016/08/02/twitterBot/</id>
+    <published>2016-08-03T03:33:59.000Z</published>
+    <updated>2016-11-02T09:36:56.064Z</updated>
     
     <content type="html"><![CDATA[<p> I am a huge fan of the television program <a href="http://abc.go.com/shows/shark-tank">Shark Tank</a>. To have more fun watching it, I decided to make a twitter bot that would retweet anything that included the searchable hashtag <a href="https://twitter.com/search?q=%23SharkTank&amp;src=tyah">#SharkTank</a>. </p>
 <p>This wasn’t a very hard of a project, there are already many tutorials and boiler plates for getting a bot up and running on Node.js with the Twitter API. You can find the source code to my bot <a href="https://github.com/JacksonJS/sharkTankBot">here</a>.</p>
@@ -255,10 +255,10 @@
   
   <entry>
     <title>Quassel IRC</title>
-    <link href="https://jacksonjs.github.io/2016/07/19/quassel/"/>
-    <id>https://jacksonjs.github.io/2016/07/19/quassel/</id>
-    <published>2016-07-20T00:32:01.000Z</published>
-    <updated>2016-07-31T01:31:31.587Z</updated>
+    <link href="https://jacksonjs.github.io/2016/07/29/quassel/"/>
+    <id>https://jacksonjs.github.io/2016/07/29/quassel/</id>
+    <published>2016-07-30T00:32:01.000Z</published>
+    <updated>2016-11-02T09:36:32.820Z</updated>
     
     <content type="html"><![CDATA[<p>Quassel IRC is a modern, cross platform, distrubuted IRC client. It requires users to set up both the server (QuasselreCore) and a client. The client attaches to the core, which saves all the IRC info. You can create new users that have seperate profiles and channels from each other, allowing multiple people to use the same core without messing up each others settings.</p>
 <p>I will assume you have an ubuntu 14.04 Digital Ocean droplet to install your Quasselcore. When we install, we will be using the SQlite database so that we can use the manaers.py script later to add and manage multiple users.</p>

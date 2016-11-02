@@ -11,14 +11,14 @@
   <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <meta name="author" content="JacksonJS">
+  <meta name="author" content="Jackson Stokes">
   
   
   
   
-    <meta name="description" content="Serving internet content from your home address can be difficult. Your ISP may change your IP address at any given moment, making it difficult to find your server on the internet. Dynamic DNS is a ...">
+    <meta name="description" content="Mount Google Drive on your Linux DesktopI had to share this little gem of a program. Many people have a google drive account, but in linux there was no convienent way to access your files from the ...">
   
-  <title>DynDNS [ JacksonJS ]</title>
+  <title>Mounting Google Drive on the Linux Desktop [ JacksonJS ]</title>
   
     <link rel="alternate" href="/atom.xml" title="JacksonJS">
   
@@ -39,13 +39,22 @@
 <body>
 <div class="side-navigate hide-area">
   
-  
-    <div class="item next">
-      <a href="/2016/08/03/prosodyonpi/">
+    <div class="item prev">
+      <a href="/2016/09/09/prosodyonpi/">
         <div class="item-icon"></div>
       </a>
       <div class="item-title">
         Install Prosody XMPP Server on your Raspberry Pi
+      </div>
+    </div>
+  
+  
+    <div class="item next">
+      <a href="/2016/08/18/dockerWordpressEncrypt/">
+        <div class="item-icon"></div>
+      </a>
+      <div class="item-title">
+        Let's Encrypt, Docker, and WordPress
       </div>
     </div>
   
@@ -113,11 +122,11 @@
       
       
   <article id="post">
-    <h1>DynDNS</h1>
+    <h1>Mounting Google Drive on the Linux Desktop</h1>
     <p class="page-title-sub">
-      <span id = "post-title-date">Created at 2016-08-03</span>
+      <span id = "post-title-date">Created at 2016-08-29</span>
       
-        <span id = "post-title-updated">Updated at 2016-08-08</span>
+        <span id = "post-title-updated">Updated at 2016-11-02</span>
       
       
       
@@ -127,29 +136,34 @@
       
         
         
-        <a href="/tags/dynamic-dns/">Dynamic DNS</a>
+        <a href="/tags/google-drive/">Google-Drive</a>
       
         
           /
         
         
-        <a href="/tags/hosting/">Hosting</a>
+        <a href="/tags/linux/">Linux</a>
+      
+        
+          /
+        
+        
+        <a href="/tags/desktop/">Desktop</a>
       
       </span>
       
     </p>
     
-    <p>Serving internet content from your home address can be difficult. Your ISP may change your IP address at any given moment, making it difficult to find your server on the internet. Dynamic DNS is a way to always be able to find your home server using conistent domain name. This guide will walkyu through setting p dynamic DNS with the privider www.noip.com. </p>
-<h5 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1"></a>Step 1</h5><p>First we have to get us a free subdomain with DynDNS. Therefore we register us for free at No-IP.com. We are going to be using the free option. </p>
-<h5 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a>Step 2</h5><p>Now we install the  No-IP.com the Dynamic DNS Update client for Linux on our Raspberry Pi and unpack it. He will later check every few minutes to see if the IP address has changed, if so, notify the application this No-IP.com with, so your subdomain refers again to the current IP address of Raspberry Pis.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">wget http://www.noip.com/client/linux/noip-duc-linux.tar.gz</div><div class="line">tar xf noip-duc-linux.tar.gz</div><div class="line">rm noip-duc-linux.tar.gz</div></pre></td></tr></table></figure>
-<h5 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a>Step 3</h5><p>Rename directory and enter:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mv noip-* noip</div><div class="line"><span class="built_in">cd</span> noip</div></pre></td></tr></table></figure>
-<h5 id="Step-4"><a href="#Step-4" class="headerlink" title="Step 4"></a>Step 4</h5><p>Now we install the application. At the end of this call we are asked for our e-mail address of the No-IP.com account, our password, and the subdomain and the update interval. Here we enter our data.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo make install</div></pre></td></tr></table></figure></p>
-<h5 id="Step-5"><a href="#Step-5" class="headerlink" title="Step 5"></a>Step 5</h5><p>Now we have to start the installed application using the following command.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo noip2</div></pre></td></tr></table></figure></p>
-<h5 id="Step-6"><a href="#Step-6" class="headerlink" title="Step 6"></a>Step 6</h5><p>If you want that the update will start automatically with the client Raspberry Pi and thus always updates the IP, you can to create a crontab.<br><code>crontab -e</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">@reboot <span class="built_in">cd</span> /home/pi/noip &amp;&amp; sudo noip2</div></pre></td></tr></table></figure>
-<p>Now forward the ports on whatever web services you will be using with your custom domain.</p>
+    <h1 id="Mount-Google-Drive-on-your-Linux-Desktop"><a href="#Mount-Google-Drive-on-your-Linux-Desktop" class="headerlink" title="Mount Google Drive on your Linux Desktop"></a>Mount Google Drive on your Linux Desktop</h1><p>I had to share this little gem of a program. Many people have a google drive account, but in linux there was no convienent way to access your files from the Desktop. This program allows you to mount your drive files on your desktop, eliminating the need to sync and waste valuable hard drive space. The souce can be obtained <a href="https://github.com/astrada/google-drive-ocamlfuse">here</a>. </p>
+<h3 id="Download"><a href="#Download" class="headerlink" title="Download:"></a>Download:</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository ppa:alessandro-strada/ppa</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install google-drive-ocamlfuse</div></pre></td></tr></table></figure>
+<h3 id="Usage"><a href="#Usage" class="headerlink" title="Usage:"></a>Usage:</h3><p>The first time, you can run google-drive-ocamlfuse without parameters:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">google-drive-ocamlfuse</div></pre></td></tr></table></figure>
+<p>This command will create the default application directory (~/.gdfuse/default), containing the configuration file config (see the wiki page for more details about configuration). And it will start a web browser to obtain authorization to access your Google Drive. This will let you modify default configuration before mounting the filesystem.</p>
+<p>Then you can mount the filesystem:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">google-drive-ocamlfuse mountpoint</div></pre></td></tr></table></figure>
+<p>If you have more than one account, you can run:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">google-drive-ocamlfuse -label label [mountpoint]</div></pre></td></tr></table></figure>
+<p>Using label to distinguish different accounts. The program will use the directory ~/.gdfuse/label to host configuration, application state, and file cache. No file is shared among different accounts, so you can have a different configuration for each one.</p>
 
   </article>
   <div class="random-toc-area">
@@ -157,18 +171,20 @@
   <button class="btn-hide-toc btn-hide-toc-hide" onclick="TOCToggle()">Hide TOC</button>
   <div class="random-toc">
     <h2>Table of Content</h2>
-    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-1"><span class="toc-text">Step 1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-2"><span class="toc-text">Step 2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-3"><span class="toc-text">Step 3</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-4"><span class="toc-text">Step 4</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-5"><span class="toc-text">Step 5</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Step-6"><span class="toc-text">Step 6</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mount-Google-Drive-on-your-Linux-Desktop"><span class="toc-text">Mount Google Drive on your Linux Desktop</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Download"><span class="toc-text">Download:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Usage"><span class="toc-text">Usage:</span></a></li></ol></li></ol></li></ol>
   </div>
 </div>
 
   
 <nav id="pagination">
   
-
+    <a href="/2016/09/09/prosodyonpi/" class="prev">&larr; Prev post Install Prosody XMPP Server on your Raspberry Pi</a>
   
 
   
-    <a href="/2016/08/03/prosodyonpi/" class="next">Next post Install Prosody XMPP Server on your Raspberry Pi &rarr;</a>
+
+  
+    <a href="/2016/08/18/dockerWordpressEncrypt/" class="next">Next post Let's Encrypt, Docker, and WordPress &rarr;</a>
   
 </nav>
 
@@ -187,8 +203,7 @@
 
   <div id="bottom-outer">
     <div id="bottom-inner">
-      Site by JacksonJS using
-      <a href="http://hexo.io">Hexo</a> & <a href="https://github.com/stiekel/hexo-theme-random">Random</a>
+      Site by Jackson Stokes 
       <br>
       
     </div>
